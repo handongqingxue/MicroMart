@@ -46,6 +46,18 @@ public class ModuleArea {
 	public void setHeightUnit(String heightUnit) {
 		this.heightUnit = heightUnit;
 	}
+	public String getMargin() {
+		return margin;
+	}
+	public void setMargin(String margin) {
+		this.margin = margin;
+	}
+	public Boolean getMarginOpen() {
+		return marginOpen;
+	}
+	public void setMarginOpen(Boolean marginOpen) {
+		this.marginOpen = marginOpen;
+	}
 	public Integer getSort() {
 		return sort;
 	}
@@ -64,6 +76,8 @@ public class ModuleArea {
 	private String widthUnit;//区域宽度单位 % px
 	private Float heightValue;//区域高度值
 	private String heightUnit;//区域高度单位 % px
+	private String margin;
+	private Boolean marginOpen;
 	private Integer sort;//排序(这个排序数字决定在手机端标签的前后显示次序，越小越靠上)
 	private Boolean ifShow;//是否显示
 	

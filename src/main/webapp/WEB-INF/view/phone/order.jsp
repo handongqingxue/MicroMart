@@ -150,38 +150,51 @@ body{
 	<c:if test="${moduleArea.tagType eq 'cmImg' }">
 		<div class="cm_img_div" id="cm_img_div">
 			<div class="cmi_list_div" id="cmi_list_div" style="width:100%;height: 365px;">
-				<c:forEach items="${requestScope.moduleTagList }" var="moduleTag" varStatus="mtStatus">
+				<c:forEach items="${requestScope.moduleTagList }" var="moduleTag">
 					<c:if test="${moduleTag.areaId eq moduleArea.id}">
-						<img class="item_img" alt="" src="<%=basePath%>${moduleTag.value}" style="margin-left:${(mtStatus.index-1)*100}%;">
+						<img class="item_img" alt="" src="<%=basePath%>${moduleTag.value}" style="margin-left:${(moduleTag.sort-1)*100}%;">
 					</c:if>
 				</c:forEach>
-				<!-- 
-				<img class="item_img" style="margin-left:100%;" alt="" src="<%=basePath%>/resource/image/202105260002.webp">
-				<img class="item_img" style="margin-left:200%;" alt="" src="<%=basePath%>/resource/image/202105260003.webp">
-				<img class="item_img" style="margin-left:300%;" alt="" src="<%=basePath%>/resource/image/202105260004.webp">
-				<img class="item_img" style="margin-left:400%;" alt="" src="<%=basePath%>/resource/image/202105260005.webp">
-				 -->
 			</div>
 			<div class="pager_div" id="pager_div">
 			</div>
 		</div>
 	</c:if>
 	<c:if test="${moduleArea.tagType eq 'div' }">
-		<div style="width:${moduleArea.widthValue}${moduleArea.widthUnit};height:${moduleArea.heightValue}${moduleArea.heightUnit};">
+		<div style="width:${moduleArea.widthValue}${moduleArea.widthUnit};
+					height:${moduleArea.heightValue}${moduleArea.heightUnit};
+					<c:if test="${moduleArea.marginOpen}">margin:${moduleArea.margin}</c:if>"
+		>
 			<c:forEach items="${requestScope.moduleTagList }" var="moduleTag">
 				<c:if test="${moduleArea.id eq moduleTag.areaId }">
 					<c:if test="${moduleTag.type eq 'img' }">
 						<img alt="" src="<%=basePath%>${moduleTag.value}" style="width:${moduleTag.widthValue}${moduleTag.widthUnit};
 						height:${moduleTag.heightValue}${moduleTag.heightUnit};
-						margin-left:${moduleTag.marginLeft}px;
-						margin-top:${moduleTag.marginTop}px;">
+						<c:if test='${moduleTag.marginLeftOpen}'>margin-left:${moduleTag.marginLeft}px;</c:if>
+						<c:if test='${moduleTag.marginTopOpen}'>margin-top:${moduleTag.marginTop}px;</c:if>
+						">
+					</c:if>
+					<c:if test="${moduleTag.type eq 'span' }">
+						<span style="
+						<c:if test='${moduleTag.colorOpen}'>color:rgb(${moduleTag.colorRedValue},${moduleTag.colorGreenValue},${moduleTag.colorBlueValue});</c:if>
+						<c:if test='${moduleTag.fontSizeOpen}'>font-size:${moduleTag.fontSize}px;</c:if>
+						<c:if test='${moduleTag.backgroundColorOpen}'>background-color:rgb(${moduleTag.backgroundColorRedValue},${moduleTag.backgroundColorGreenValue},${moduleTag.backgroundColorBlueValue});</c:if>
+						<c:if test='${moduleTag.paddingTopOpen}'>padding-top:${moduleTag.paddingTop}px;</c:if>
+						<c:if test='${moduleTag.paddingRightOpen}'>padding-right:${moduleTag.paddingRight}px;</c:if>
+						<c:if test='${moduleTag.paddingBottomOpen}'>padding-bottom:${moduleTag.paddingBottom}px;</c:if>
+						<c:if test='${moduleTag.paddingLeftOpen}'>padding-left:${moduleTag.paddingLeft}px;</c:if>
+						<c:if test='${moduleTag.borderRadiusOpen}'>border-radius:${moduleTag.borderRadius}px;</c:if>
+						">${moduleTag.value}</span>
 					</c:if>
 				</c:if>
 			</c:forEach>
 		</div>
 	</c:if>
 </c:forEach>
-<img style="width:100%;" alt="" src="<%=basePath%>/resource/image/202105260001.webp">
-<div style="width:100%;height:45px;line-height:45px;">我都不惜说你了。。。</div>
+<div style="width:95%;height:42px;margin:auto;">
+	<span style="color: #fff;background-color: #EB193A;padding-top: 0px;padding-right: 4px;padding-bottom:0px;padding-left:4px;border-radius: 3px;">热卖</span>
+	<span style="color: #fff;background-color: #d6a971;padding-top: 0px;padding-right: 4px;padding-bottom:0px;padding-left:4px;border-radius: 3px;">包邮</span>
+	<span style="color: #333;font-size:15px;">【滴水不漏】全能防水胶带，快速补漏，操作简单！铁皮、水泥地都能用！</span>
+</div>
 </body>
 </html>
