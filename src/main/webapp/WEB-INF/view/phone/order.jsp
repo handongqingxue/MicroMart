@@ -22,7 +22,24 @@ var isSlide = false;
 var sliderNumber = 0;//滑块是数量，控制溢出不能滑动
 $(function(){
 	initActivityDiv();
+	initTabDiv();
 });
+
+function initTabDiv(){
+	var titleDiv=$("#tab_div #title_div");
+	var itemDiv=titleDiv.find("div[id^='item_div']");
+	var tdw=titleDiv.css("width");
+	var tidw=tdw.substring(0,tdw.length-2)/itemDiv.length;
+	itemDiv.css("width",tidw+"px");
+	itemDiv.click(function(){
+		changeTab($(this).attr("id"));
+	});
+}
+
+function changeTab(itemId){
+	$("#tab_div #content_div div[id^='item_div']").css("display","none");
+	$("#tab_div #content_div div[id='"+itemId+"']").css("display","block");
+}
 
 function initActivityDiv(){
 	document.getElementById('cm_img_div').addEventListener('touchstart',touchstart, false);
@@ -191,10 +208,24 @@ body{
 		</div>
 	</c:if>
 </c:forEach>
-<div style="width:95%;height:42px;margin:auto;">
-	<span style="color: #fff;background-color: #EB193A;padding-top: 0px;padding-right: 4px;padding-bottom:0px;padding-left:4px;border-radius: 3px;">热卖</span>
-	<span style="color: #fff;background-color: #d6a971;padding-top: 0px;padding-right: 4px;padding-bottom:0px;padding-left:4px;border-radius: 3px;">包邮</span>
-	<span style="color: #333;font-size:15px;">【滴水不漏】全能防水胶带，快速补漏，操作简单！铁皮、水泥地都能用！</span>
+<div class="tab_div" id="tab_div" style="width:100%;">
+	<div class="title_div" id="title_div" style="width:100%;">
+	
+		<div class="item_div" id="item_div1" style="height:50px;line-height:50px;color:rgb(235,25,58);text-align: center;">
+			商品详情
+			<div class="line_div" style="width:40%;margin:auto;border-bottom: 2px solid #EB193A;"></div>
+		</div>
+		<div class="item_div" id="item_div2" style="height:50px;line-height:50px;margin-top:-50px;margin-left:50%;color:rgb(51,51,51);text-align: center;">
+			常见帮助
+			<div class="line_div" style="width:40%;margin:auto;border-bottom: 2px solid #fff;"></div>
+		</div>
+		
+	</div>
+	<div id="content_div">
+	
+		<div id="item_div1" style="">我都不惜说你了。。。</div>
+		
+	</div>
 </div>
 </body>
 </html>
