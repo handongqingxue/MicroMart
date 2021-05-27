@@ -146,18 +146,21 @@ body{
 <title>下单</title>
 </head>
 <body>
-
-
-
 <c:forEach items="${requestScope.moduleAreaList }" var="moduleArea">
 	<c:if test="${moduleArea.tagType eq 'cmImg' }">
 		<div class="cm_img_div" id="cm_img_div">
 			<div class="cmi_list_div" id="cmi_list_div" style="width:100%;height: 365px;">
-				<img class="item_img" alt="" src="<%=basePath%>/resource/image/202105260001.webp">
+				<c:forEach items="${requestScope.moduleTagList }" var="moduleTag" varStatus="mtStatus">
+					<c:if test="${moduleTag.areaId eq moduleArea.id}">
+						<img class="item_img" alt="" src="<%=basePath%>${moduleTag.value}" style="margin-left:${(mtStatus.index-1)*100}%;">
+					</c:if>
+				</c:forEach>
+				<!-- 
 				<img class="item_img" style="margin-left:100%;" alt="" src="<%=basePath%>/resource/image/202105260002.webp">
 				<img class="item_img" style="margin-left:200%;" alt="" src="<%=basePath%>/resource/image/202105260003.webp">
 				<img class="item_img" style="margin-left:300%;" alt="" src="<%=basePath%>/resource/image/202105260004.webp">
 				<img class="item_img" style="margin-left:400%;" alt="" src="<%=basePath%>/resource/image/202105260005.webp">
+				 -->
 			</div>
 			<div class="pager_div" id="pager_div">
 			</div>
