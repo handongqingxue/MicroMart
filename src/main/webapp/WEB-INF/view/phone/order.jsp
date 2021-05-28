@@ -184,12 +184,12 @@ body{
 					<c:if test="${moduleTag.type eq 'img' }">
 						<img alt="" src="<%=basePath%>${moduleTag.value}" style="width:${moduleTag.widthValue}${moduleTag.widthUnit};
 						height:${moduleTag.heightValue}${moduleTag.heightUnit};
-						<c:if test='${moduleTag.marginLeftOpen}'>margin-left:${moduleTag.marginLeft}px;</c:if>
-						<c:if test='${moduleTag.marginTopOpen}'>margin-top:${moduleTag.marginTop}px;</c:if>
+						<c:if test='${moduleTag.marginLeftOpen}'>margin-left:${moduleTag.marginLeftValue}${moduleTag.marginLeftUnit};</c:if>
+						<c:if test='${moduleTag.marginTopOpen}'>margin-top:${moduleTag.marginTopValue}${moduleTag.marginTopUnit};</c:if>
 						">
 					</c:if>
 					<c:if test="${moduleTag.type eq 'span' }">
-						<span style="
+						<${moduleTag.type} style="
 						<c:if test='${moduleTag.colorOpen}'>color:rgb(${moduleTag.colorRedValue},${moduleTag.colorGreenValue},${moduleTag.colorBlueValue});</c:if>
 						<c:if test='${moduleTag.fontSizeOpen}'>font-size:${moduleTag.fontSize}px;</c:if>
 						<c:if test='${moduleTag.backgroundColorOpen}'>background-color:rgb(${moduleTag.backgroundColorRedValue},${moduleTag.backgroundColorGreenValue},${moduleTag.backgroundColorBlueValue});</c:if>
@@ -198,7 +198,7 @@ body{
 						<c:if test='${moduleTag.paddingBottomOpen}'>padding-bottom:${moduleTag.paddingBottom}px;</c:if>
 						<c:if test='${moduleTag.paddingLeftOpen}'>padding-left:${moduleTag.paddingLeft}px;</c:if>
 						<c:if test='${moduleTag.borderRadiusOpen}'>border-radius:${moduleTag.borderRadius}px;</c:if>
-						">${moduleTag.value}</span>
+						">${moduleTag.value}</${moduleTag.type}>
 					</c:if>
 				</c:if>
 			</c:forEach>
@@ -238,6 +238,37 @@ body{
 					</c:if>
 				</c:forEach>
 			</div>
+			<div id="content_div">
+				<c:forEach items="${requestScope.childModuleAreaList }" var="childModuleArea">
+					<c:if test="${childModuleArea.tagType eq 'tabItemDiv'&&childModuleArea.parentId eq moduleArea.id }">
+						<div id="item_div${childModuleArea.sort}">
+							<c:forEach items="${requestScope.moduleTagList }" var="moduleTag">
+								<c:if test="${childModuleArea.id eq moduleTag.areaId }">
+									<c:if test="${moduleTag.type eq 'div' }">
+										<${moduleTag.type} style="
+										width:${moduleTag.widthValue}${moduleTag.widthUnit};
+										<c:if test="${moduleTag.marginOpen}">margin:${moduleTag.margin};</c:if>
+										<c:if test="${moduleTag.marginTopOpen}">margin-top:${moduleTag.marginTopValue}${moduleTag.marginTopUnit};</c:if>
+										<c:if test="${moduleTag.colorOpen}">color:rgb(${moduleTag.colorRedValue},${moduleTag.colorGreenValue},${moduleTag.colorBlueValue});</c:if>
+										<c:if test="${moduleTag.fontWeightOpen}">font-weight: ${moduleTag.fontWeight};</c:if>
+										<c:if test="${moduleTag.textAlignOpen}">text-align:${moduleTag.textAlign};</c:if>
+										<c:if test="${moduleTag.backgroundColorOpen}">background-color: rgb(${moduleTag.backgroundColorRedValue},
+																											${moduleTag.backgroundColorGreenValue},
+																											${moduleTag.backgroundColorBlueValue});
+										</c:if>
+										">${moduleTag.value}</${moduleTag.type}>
+									</c:if>
+									<c:if test="${moduleTag.type eq 'img'||moduleTag.type eq 'embed' }">
+										<${moduleTag.type} alt="" src="<%=basePath%>${moduleTag.value}" style="
+										width:${moduleTag.widthValue}${moduleTag.widthUnit};
+										">
+									</c:if>
+								</c:if>
+							</c:forEach>
+						</div>
+					</c:if>
+				</c:forEach>
+			</div>
 		</div>
 	</c:if>
 </c:forEach>
@@ -259,6 +290,7 @@ body{
 		<div id="item_div1" style="">
 			<div style="width:90%;margin: auto;margin-top:20px;color:rgb(0,102,204);font-weight: bold;">住了几十年的老房子，屋顶、窗台有裂缝，到处漏水、渗水。屋外大雨，屋里小雨，苦不堪言！</div>
 			<div style="width:70%;margin: auto;color:rgb(255,255,0);font-weight: bold;text-align:center;background-color: rgb(230,0,0);">补漏丁基材质胶布，横空出世！</div>
+			<embed src="<%=basePath %>resource/embed/202105270001.mp4"/>
 		</div>
 		<div id="item_div2" style="display: none;">雷雨世界香肠灾难电影。。。</div>
 		

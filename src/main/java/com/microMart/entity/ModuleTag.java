@@ -45,11 +45,17 @@ public class ModuleTag {
 	public void setHeightUnit(String heightUnit) {
 		this.heightUnit = heightUnit;
 	}
-	public Float getMarginLeft() {
-		return marginLeft;
+	public Float getMarginLeftValue() {
+		return marginLeftValue;
 	}
-	public void setMarginLeft(Float marginLeft) {
-		this.marginLeft = marginLeft;
+	public void setMarginLeftValue(Float marginLeftValue) {
+		this.marginLeftValue = marginLeftValue;
+	}
+	public String getMarginLeftUnit() {
+		return marginLeftUnit;
+	}
+	public void setMarginLeftUnit(String marginLeftUnit) {
+		this.marginLeftUnit = marginLeftUnit;
 	}
 	public Boolean getMarginLeftOpen() {
 		return marginLeftOpen;
@@ -57,17 +63,35 @@ public class ModuleTag {
 	public void setMarginLeftOpen(Boolean marginLeftOpen) {
 		this.marginLeftOpen = marginLeftOpen;
 	}
-	public Float getMarginTop() {
-		return marginTop;
+	public Float getMarginTopValue() {
+		return marginTopValue;
 	}
-	public void setMarginTop(Float marginTop) {
-		this.marginTop = marginTop;
+	public void setMarginTopValue(Float marginTopValue) {
+		this.marginTopValue = marginTopValue;
+	}
+	public String getMarginTopUnit() {
+		return marginTopUnit;
+	}
+	public void setMarginTopUnit(String marginTopUnit) {
+		this.marginTopUnit = marginTopUnit;
 	}
 	public Boolean getMarginTopOpen() {
 		return marginTopOpen;
 	}
 	public void setMarginTopOpen(Boolean marginTopOpen) {
 		this.marginTopOpen = marginTopOpen;
+	}
+	public String getMargin() {
+		return margin;
+	}
+	public void setMargin(String margin) {
+		this.margin = margin;
+	}
+	public Boolean getMarginOpen() {
+		return marginOpen;
+	}
+	public void setMarginOpen(Boolean marginOpen) {
+		this.marginOpen = marginOpen;
 	}
 	public Float getPaddingTop() {
 		return paddingTop;
@@ -153,6 +177,30 @@ public class ModuleTag {
 	public void setFontSizeOpen(Boolean fontSizeOpen) {
 		this.fontSizeOpen = fontSizeOpen;
 	}
+	public String getFontWeight() {
+		return fontWeight;
+	}
+	public void setFontWeight(String fontWeight) {
+		this.fontWeight = fontWeight;
+	}
+	public Boolean getFontWeightOpen() {
+		return fontWeightOpen;
+	}
+	public void setFontWeightOpen(Boolean fontWeightOpen) {
+		this.fontWeightOpen = fontWeightOpen;
+	}
+	public String getTextAlign() {
+		return textAlign;
+	}
+	public void setTextAlign(String textAlign) {
+		this.textAlign = textAlign;
+	}
+	public Boolean getTextAlignOpen() {
+		return textAlignOpen;
+	}
+	public void setTextAlignOpen(Boolean textAlignOpen) {
+		this.textAlignOpen = textAlignOpen;
+	}
 	public Integer getBackgroundColorRedValue() {
 		return backgroundColorRedValue;
 	}
@@ -219,10 +267,14 @@ public class ModuleTag {
 	private String widthUnit;//标签宽度单位
 	private Float heightValue;//标签高度值
 	private String heightUnit;//标签高度单位
-	private Float marginLeft;//标签左外边距
+	private Float marginLeftValue;//标签左外边距
+	private String marginLeftUnit;
 	private Boolean marginLeftOpen;
-	private Float marginTop;//标签上外边距
+	private Float marginTopValue;//标签上外边距
+	private String marginTopUnit;
 	private Boolean marginTopOpen;
+	private String margin;
+	private Boolean marginOpen;
 	private Float paddingTop;
 	private Boolean paddingTopOpen;
 	private Float paddingRight;
@@ -237,6 +289,10 @@ public class ModuleTag {
 	private Boolean colorOpen;
 	private Integer fontSize;
 	private Boolean fontSizeOpen;
+	private String fontWeight;
+	private Boolean fontWeightOpen;
+	private String textAlign;
+	private Boolean textAlignOpen;
 	private Integer backgroundColorRedValue;
 	private Integer backgroundColorGreenValue;
 	private Integer backgroundColorBlueValue;
