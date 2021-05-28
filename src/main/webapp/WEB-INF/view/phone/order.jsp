@@ -21,16 +21,13 @@ var startTranslate;
 var isSlide = false;
 var sliderNumber = 0;//滑块是数量，控制溢出不能滑动
 $(function(){
-	initActivityDiv();
+	initCarouselMapDiv();
 	initTabDiv();
 });
 
 function initTabDiv(){
 	var titleDiv=$("#tab_div #title_div");
 	var itemDiv=titleDiv.find("div[id^='item_div']");
-	var tdw=titleDiv.css("width");
-	var tidw=tdw.substring(0,tdw.length-2)/itemDiv.length;
-	itemDiv.css("width",tidw+"px");
 	itemDiv.click(function(){
 		changeTab($(this).attr("id"));
 	});
@@ -41,7 +38,7 @@ function changeTab(itemId){
 	$("#tab_div #content_div div[id='"+itemId+"']").css("display","block");
 }
 
-function initActivityDiv(){
+function initCarouselMapDiv(){
 	document.getElementById('cm_img_div').addEventListener('touchstart',touchstart, false);
 	document.getElementById('cm_img_div').addEventListener('touchmove',touchmove, false);
 	document.getElementById('cm_img_div').addEventListener('touchend',touchend, false);
@@ -207,15 +204,51 @@ body{
 			</c:forEach>
 		</div>
 	</c:if>
+	<c:if test="${moduleArea.tagType eq 'tabDiv' }">
+		<div class="tab_div" id="tab_div" style="width:${moduleArea.widthValue}${moduleArea.widthUnit};"
+		>
+			<div class="title_div" id="title_div" style="width:100%;">
+				<c:forEach items="${requestScope.childModuleAreaList }" var="childModuleArea">
+					<c:if test="${childModuleArea.tagType eq 'tabItemDiv'&&childModuleArea.parentId eq moduleArea.id }">
+						<div class="item_div" id="item_div${childModuleArea.sort}" style="
+							width:${childModuleArea.widthValue}${childModuleArea.widthUnit};
+							height:${childModuleArea.heightValue}${childModuleArea.heightUnit};
+							line-height:${childModuleArea.lineHeightValue}${childModuleArea.lineHeightUnit};
+							<c:choose>
+								<c:when test="${childModuleArea.sort eq 1}">
+								</c:when>
+								<c:otherwise>
+									margin-top:${childModuleArea.marginTopValue}${childModuleArea.marginTopUnit};
+									margin-left:${childModuleArea.marginLeftValue}${childModuleArea.marginLeftUnit};
+								</c:otherwise>
+							</c:choose>
+							color:rgb(${childModuleArea.colorRedValue},${childModuleArea.colorGreenValue},${childModuleArea.colorBlueValue});
+							text-align: ${childModuleArea.textAlign};">
+							${childModuleArea.value}
+							<div class="line_div" style="
+							width:${childModuleArea.lineDivWidthValue}${childModuleArea.lineDivWidthUnit};
+							margin:${childModuleArea.lineDivMargin};
+							border-bottom-width:${childModuleArea.lineDivBorderBottomWidthValue}${childModuleArea.lineDivBorderBottomWidthUnit};
+							border-bottom-style:${childModuleArea.lineDivBorderBottomWidthStyle};
+							border-bottom-color:rgb(${childModuleArea.lineDivBorderBottomWidthColorRedValue},
+													${childModuleArea.lineDivBorderBottomWidthColorGreenValue},
+													${childModuleArea.lineDivBorderBottomWidthColorBlueValue});
+							"></div>
+						</div>
+					</c:if>
+				</c:forEach>
+			</div>
+		</div>
+	</c:if>
 </c:forEach>
 <div class="tab_div" id="tab_div" style="width:100%;">
 	<div class="title_div" id="title_div" style="width:100%;">
 	
-		<div class="item_div" id="item_div1" style="height:50px;line-height:50px;color:rgb(235,25,58);text-align: center;">
+		<div class="item_div" id="item_div1" style="width:50%;height:50px;line-height:50px;color:rgb(235,25,58);text-align: center;">
 			商品详情
 			<div class="line_div" style="width:40%;margin:auto;border-bottom: 2px solid #EB193A;"></div>
 		</div>
-		<div class="item_div" id="item_div2" style="height:50px;line-height:50px;margin-top:-50px;margin-left:50%;color:rgb(51,51,51);text-align: center;">
+		<div class="item_div" id="item_div2" style="width:50%;height:50px;line-height:50px;margin-top:-50px;margin-left:50%;color:rgb(51,51,51);text-align: center;">
 			常见帮助
 			<div class="line_div" style="width:40%;margin:auto;border-bottom: 2px solid #fff;"></div>
 		</div>
@@ -223,7 +256,11 @@ body{
 	</div>
 	<div id="content_div">
 	
-		<div id="item_div1" style="">我都不惜说你了。。。</div>
+		<div id="item_div1" style="">
+			<div style="width:90%;margin: auto;margin-top:20px;color:rgb(0,102,204);font-weight: bold;">住了几十年的老房子，屋顶、窗台有裂缝，到处漏水、渗水。屋外大雨，屋里小雨，苦不堪言！</div>
+			<div style="width:70%;margin: auto;color:rgb(255,255,0);font-weight: bold;text-align:center;background-color: rgb(230,0,0);">补漏丁基材质胶布，横空出世！</div>
+		</div>
+		<div id="item_div2" style="display: none;">雷雨世界香肠灾难电影。。。</div>
 		
 	</div>
 </div>

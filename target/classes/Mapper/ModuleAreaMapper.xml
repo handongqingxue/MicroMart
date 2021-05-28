@@ -4,6 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.microMart.dao.ModuleAreaMapper">
 	<select id="selectPhoneList" resultType="com.microMart.entity.ModuleArea">
-		select * from module_area where ifShow=1 order by sort
+		select * from module_area where ifShow=1
+		<if test="levelFlag==@com.microMart.entity.ModuleArea@PARENT">
+			and parentId=0
+		</if>
+		<if test="levelFlag==@com.microMart.entity.ModuleArea@CHILD">
+			and parentId!=0
+		</if>
+		 order by sort
 	</select>
 </mapper>

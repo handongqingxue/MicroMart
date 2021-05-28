@@ -16,8 +16,8 @@ public class ModuleAreaServiceImpl implements ModuleAreaService {
 	private ModuleAreaMapper moduleAreaDao;
 
 	@Override
-	public List<ModuleArea> selectPhoneList() {
+	public List<ModuleArea> selectPhoneList(int levelFlag) {
 		// TODO Auto-generated method stub
-		return moduleAreaDao.selectPhoneList();
+		return moduleAreaDao.selectPhoneList(levelFlag);
 	}
 }

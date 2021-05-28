@@ -23,8 +23,11 @@ public class PhoneController {
 	@RequestMapping(value="/order")
 	public String order(HttpServletRequest request) {
 		
-		List<ModuleArea> moduleAreaList=moduleAreaService.selectPhoneList();
+		List<ModuleArea> moduleAreaList=moduleAreaService.selectPhoneList(ModuleArea.PARENT);
 		request.setAttribute("moduleAreaList", moduleAreaList);
+		
+		List<ModuleArea> childModuleAreaList=moduleAreaService.selectPhoneList(ModuleArea.CHILD);
+		request.setAttribute("childModuleAreaList", childModuleAreaList);
 		
 		List<ModuleTag> moduleTagList=moduleTagService.selectPhoneList();
 		request.setAttribute("moduleTagList", moduleTagList);

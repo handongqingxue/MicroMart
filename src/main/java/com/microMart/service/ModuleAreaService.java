@@ -6,6 +6,6 @@ import com.microMart.entity.ModuleArea;
 
 public interface ModuleAreaService {
 
-	List<ModuleArea> selectPhoneList();
+	List<ModuleArea> selectPhoneList(int levelFlag);
 
 }
