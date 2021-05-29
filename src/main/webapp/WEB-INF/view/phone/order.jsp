@@ -23,7 +23,31 @@ var sliderNumber = 0;//滑块是数量，控制溢出不能滑动
 $(function(){
 	initCarouselMapDiv();
 	initTabDiv();
+	initHelpListDiv();
 });
+
+function initHelpListDiv(){
+	var titleDiv=$("#help_list_div div[id^='help_item_div'] div[id='help_title_div']");
+	titleDiv.click(function(){
+		var id=$(this).parent().attr("id").substring(13);
+		var display=$(this).next().css("display");
+		if(display=="block"){
+			$(this).next().css("display","none");
+			$(this).find("div[id='pointer_div"+id+"']").attr("class","pointer_div close_div");
+		}
+		else{
+			$(this).next().css("display","block");
+			$(this).find("div[id='pointer_div"+id+"']").attr("class","pointer_div open_div");
+		}
+		$("#help_list_div div[id^='help_item_div'] div[id='help_title_div'] div[id!='pointer_div"+id+"']").attr("class","pointer_div close_div");
+		$("#help_list_div div[id!='help_item_div"+id+"'] div[id='help_content_div']").css("display","none");
+	});
+}
+
+function showHelpContentDiv(id){
+	//$("#help_list_div div[id^='help_item_div'] div[id='help_content_div']").css("display","none");
+	$("#help_list_div div[id='help_item_div"+id+"'] div[id='help_content_div']").css("display","block");
+}
 
 function initTabDiv(){
 	var titleDiv=$("#tab_div #title_div");
@@ -32,6 +56,7 @@ function initTabDiv(){
 		var id=$(this).attr("id").substring(8);
 		changeTab(id);
 	});
+	changeTab(6);
 }
 
 function changeTab(id){
@@ -168,6 +193,26 @@ body{
 }
 .cm_img_div .pager_div .unSelected{
 	background-color: #EEEEEE;
+}
+
+.help_list_div .help_item_div .pointer_div{
+	content: "&nbsp;";
+	display: inline-block;
+	height: 6px;
+	width: 6px;
+	border-width: 2px 2px 0 0;
+	border-color: #999;
+	border-style: solid;
+	position: absolute;
+	margin-top: 17px;
+	right: 10px;
+	transition: transform .7s,-webkit-transform .7s;
+}
+.help_list_div .help_item_div .close_div{
+	transform: rotate(45deg);
+}
+.help_list_div .help_item_div .open_div{
+	transform: rotate(135deg);
 }
 </style>
 <title>下单</title>
@@ -325,7 +370,30 @@ body{
 			<div style="width:70%;margin: auto;color:rgb(255,255,0);font-weight: bold;text-align:center;background-color: rgb(230,0,0);">补漏丁基材质胶布，横空出世！</div>
 			<embed src="<%=basePath %>resource/embed/202105270001.mp4"/>
 		</div>
-		<div id="item_div2" style="display: none;">雷雨世界香肠灾难电影。。。</div>
+		<div id="item_div2" style="display: none;">
+			<div class="help_list_div" id="help_list_div" style="width:100%;margin-bottom: 10px;">
+				<div class="help_item_div" id="help_item_div1" style="width:100%;border-bottom: 1px solid rgba(0,0,0,.1);">
+					<div id="help_title_div" style="width:100%;height:40px;line-height:40px;font-size: 16px;">
+						1. 我的订单大概多久发货？
+						<div class="pointer_div close_div" id="pointer_div1"></div>
+					</div>
+					<div id="help_content_div" style="line-height: 30px;margin-left: 16px;font-size: 14px;display: none;">
+					订单的发货时间为您下单之后的72小时内，请您耐心等待，订单状态及物流进度可在下单成功后的短信内容中查看，普通地区异地物流运转3-5天左右，偏远地区异地物流运转时间5-7天左右，如遇特殊情况将会导致延误，以物流官网进度为准。若您的订单超出72小时仍未发货，建议您联系商家进行咨询。
+					</div>
+				</div>
+				<div class="help_item_div" id="help_item_div2" style="width:100%;border-bottom: 1px solid rgba(0,0,0,.1);">
+					<div id="help_title_div" style="width:100%;height:40px;line-height:40px;font-size: 16px;">
+						2. 我的订单如何申请退换货？
+						<div class="pointer_div close_div" id="pointer_div2"></div>
+					</div>
+					<div id="help_content_div" style="line-height: 30px;margin-left: 16px;font-size: 14px;display: none;">
+					若您需要办理退换货，无需对订单进行任何操作，请您及时联系商家协商退换货事宜，向商家索取商品寄回地址信息，将商品寄回至商家处，并向商家提供商品寄回有效物流单号，由商家为您安排退换货。
+换货要求：保证商品全新，不影响二次销售，商品包装完好，附件、赠品齐全。在寄回包裹中放置小纸条注明您的联系方式、订单号，禁止使用“到付”运费支付形式将商品寄回。
+退换货运费说明：交易中的运费争议，根据“谁过错，谁承担”的原则处理，但买卖双方协商一致的除外。 
+					</div>
+				</div>
+			</div>
+		</div>
 		
 	</div>
 </div>
