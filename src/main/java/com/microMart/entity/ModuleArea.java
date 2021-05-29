@@ -85,6 +85,24 @@ public class ModuleArea {
 	public void setMarginTopOpen(Boolean marginTopOpen) {
 		this.marginTopOpen = marginTopOpen;
 	}
+	public Float getMarginBottomValue() {
+		return marginBottomValue;
+	}
+	public void setMarginBottomValue(Float marginBottomValue) {
+		this.marginBottomValue = marginBottomValue;
+	}
+	public String getMarginBottomUnit() {
+		return marginBottomUnit;
+	}
+	public void setMarginBottomUnit(String marginBottomUnit) {
+		this.marginBottomUnit = marginBottomUnit;
+	}
+	public Boolean getMarginBottomOpen() {
+		return marginBottomOpen;
+	}
+	public void setMarginBottomOpen(Boolean marginBottomOpen) {
+		this.marginBottomOpen = marginBottomOpen;
+	}
 	public Float getMarginLeftValue() {
 		return marginLeftValue;
 	}
@@ -168,6 +186,180 @@ public class ModuleArea {
 	}
 	public void setTextAlign(String textAlign) {
 		this.textAlign = textAlign;
+	}
+	public Float getBorderBottomWidthValue() {
+		return borderBottomWidthValue;
+	}
+	public void setBorderBottomWidthValue(Float borderBottomWidthValue) {
+		this.borderBottomWidthValue = borderBottomWidthValue;
+	}
+	public String getBorderBottomWidthUnit() {
+		return borderBottomWidthUnit;
+	}
+	public void setBorderBottomWidthUnit(String borderBottomWidthUnit) {
+		this.borderBottomWidthUnit = borderBottomWidthUnit;
+	}
+	public String getBorderBottomStyle() {
+		return borderBottomStyle;
+	}
+	public void setBorderBottomStyle(String borderBottomStyle) {
+		this.borderBottomStyle = borderBottomStyle;
+	}
+	public Integer getBorderBottomColorRedValue() {
+		return borderBottomColorRedValue;
+	}
+	public void setBorderBottomColorRedValue(Integer borderBottomColorRedValue) {
+		this.borderBottomColorRedValue = borderBottomColorRedValue;
+	}
+	public Integer getBorderBottomColorGreenValue() {
+		return borderBottomColorGreenValue;
+	}
+	public void setBorderBottomColorGreenValue(Integer borderBottomColorGreenValue) {
+		this.borderBottomColorGreenValue = borderBottomColorGreenValue;
+	}
+	public Integer getBorderBottomColorBlueValue() {
+		return borderBottomColorBlueValue;
+	}
+	public void setBorderBottomColorBlueValue(Integer borderBottomColorBlueValue) {
+		this.borderBottomColorBlueValue = borderBottomColorBlueValue;
+	}
+	public Float getBorderBottomColorAlphaValue() {
+		return borderBottomColorAlphaValue;
+	}
+	public void setBorderBottomColorAlphaValue(Float borderBottomColorAlphaValue) {
+		this.borderBottomColorAlphaValue = borderBottomColorAlphaValue;
+	}
+	public Boolean getBorderBottomColorOpen() {
+		return borderBottomColorOpen;
+	}
+	public void setBorderBottomColorOpen(Boolean borderBottomColorOpen) {
+		this.borderBottomColorOpen = borderBottomColorOpen;
+	}
+	public Float getTitleWidthValue() {
+		return titleWidthValue;
+	}
+	public void setTitleWidthValue(Float titleWidthValue) {
+		this.titleWidthValue = titleWidthValue;
+	}
+	public String getTitleWidthUnit() {
+		return titleWidthUnit;
+	}
+	public void setTitleWidthUnit(String titleWidthUnit) {
+		this.titleWidthUnit = titleWidthUnit;
+	}
+	public Boolean getTitleWidthOpen() {
+		return titleWidthOpen;
+	}
+	public void setTitleWidthOpen(Boolean titleWidthOpen) {
+		this.titleWidthOpen = titleWidthOpen;
+	}
+	public Float getTitleHeightValue() {
+		return titleHeightValue;
+	}
+	public void setTitleHeightValue(Float titleHeightValue) {
+		this.titleHeightValue = titleHeightValue;
+	}
+	public String getTitleHeightUnit() {
+		return titleHeightUnit;
+	}
+	public void setTitleHeightUnit(String titleHeightUnit) {
+		this.titleHeightUnit = titleHeightUnit;
+	}
+	public Boolean getTitleHeightOpen() {
+		return titleHeightOpen;
+	}
+	public void setTitleHeightOpen(Boolean titleHeightOpen) {
+		this.titleHeightOpen = titleHeightOpen;
+	}
+	public Float getTitleLineHeightValue() {
+		return titleLineHeightValue;
+	}
+	public void setTitleLineHeightValue(Float titleLineHeightValue) {
+		this.titleLineHeightValue = titleLineHeightValue;
+	}
+	public String getTitleLineHeightUnit() {
+		return titleLineHeightUnit;
+	}
+	public void setTitleLineHeightUnit(String titleLineHeightUnit) {
+		this.titleLineHeightUnit = titleLineHeightUnit;
+	}
+	public Boolean getTitleLineHeightOpen() {
+		return titleLineHeightOpen;
+	}
+	public void setTitleLineHeightOpen(Boolean titleLineHeightOpen) {
+		this.titleLineHeightOpen = titleLineHeightOpen;
+	}
+	public Integer getTitleFontSize() {
+		return titleFontSize;
+	}
+	public void setTitleFontSize(Integer titleFontSize) {
+		this.titleFontSize = titleFontSize;
+	}
+	public Boolean getTitleFontSizeOpen() {
+		return titleFontSizeOpen;
+	}
+	public void setTitleFontSizeOpen(Boolean titleFontSizeOpen) {
+		this.titleFontSizeOpen = titleFontSizeOpen;
+	}
+	public Float getContentLineHeightValue() {
+		return contentLineHeightValue;
+	}
+	public void setContentLineHeightValue(Float contentLineHeightValue) {
+		this.contentLineHeightValue = contentLineHeightValue;
+	}
+	public String getContentLineHeightUnit() {
+		return contentLineHeightUnit;
+	}
+	public void setContentLineHeightUnit(String contentLineHeightUnit) {
+		this.contentLineHeightUnit = contentLineHeightUnit;
+	}
+	public Boolean getContentLineHeightOpen() {
+		return contentLineHeightOpen;
+	}
+	public void setContentLineHeightOpen(Boolean contentLineHeightOpen) {
+		this.contentLineHeightOpen = contentLineHeightOpen;
+	}
+	public Float getContentMarginLeftValue() {
+		return contentMarginLeftValue;
+	}
+	public void setContentMarginLeftValue(Float contentMarginLeftValue) {
+		this.contentMarginLeftValue = contentMarginLeftValue;
+	}
+	public String getContentMarginLeftUnit() {
+		return contentMarginLeftUnit;
+	}
+	public void setContentMarginLeftUnit(String contentMarginLeftUnit) {
+		this.contentMarginLeftUnit = contentMarginLeftUnit;
+	}
+	public Boolean getContentMarginLeftOpen() {
+		return contentMarginLeftOpen;
+	}
+	public void setContentMarginLeftOpen(Boolean contentMarginLeftOpen) {
+		this.contentMarginLeftOpen = contentMarginLeftOpen;
+	}
+	public Float getContentFontSizeValue() {
+		return contentFontSizeValue;
+	}
+	public void setContentFontSizeValue(Float contentFontSizeValue) {
+		this.contentFontSizeValue = contentFontSizeValue;
+	}
+	public String getContentFontSizeUnit() {
+		return contentFontSizeUnit;
+	}
+	public void setContentFontSizeUnit(String contentFontSizeUnit) {
+		this.contentFontSizeUnit = contentFontSizeUnit;
+	}
+	public Boolean getContentFontSizeOpen() {
+		return contentFontSizeOpen;
+	}
+	public void setContentFontSizeOpen(Boolean contentFontSizeOpen) {
+		this.contentFontSizeOpen = contentFontSizeOpen;
+	}
+	public String getContentDisplay() {
+		return contentDisplay;
+	}
+	public void setContentDisplay(String contentDisplay) {
+		this.contentDisplay = contentDisplay;
 	}
 	public Float getLineDivWidthValue() {
 		return lineDivWidthValue;
@@ -308,6 +500,9 @@ public class ModuleArea {
 	private Float marginTopValue;
 	private String marginTopUnit;
 	private Boolean marginTopOpen;
+	private Float marginBottomValue;
+	private String marginBottomUnit;
+	private Boolean marginBottomOpen;
 	private Float marginLeftValue;
 	private String marginLeftUnit;
 	private Boolean marginLeftOpen;
@@ -322,6 +517,35 @@ public class ModuleArea {
 	private Integer selectedColorBlueValue;
 	private Boolean selectedColorOpen;
 	private String textAlign;
+	private Float borderBottomWidthValue;
+	private String borderBottomWidthUnit;
+	private String borderBottomStyle;
+	private Integer borderBottomColorRedValue;
+	private Integer borderBottomColorGreenValue;
+	private Integer borderBottomColorBlueValue;
+	private Float borderBottomColorAlphaValue;
+	private Boolean borderBottomColorOpen;
+	private Float titleWidthValue;
+	private String titleWidthUnit;
+	private Boolean titleWidthOpen;
+	private Float titleHeightValue;
+	private String titleHeightUnit;
+	private Boolean titleHeightOpen;
+	private Float titleLineHeightValue;
+	private String titleLineHeightUnit;
+	private Boolean titleLineHeightOpen;
+	private Integer titleFontSize;
+	private Boolean titleFontSizeOpen;
+	private Float contentLineHeightValue;
+	private String contentLineHeightUnit;
+	private Boolean contentLineHeightOpen;
+	private Float contentMarginLeftValue;
+	private String contentMarginLeftUnit;
+	private Boolean contentMarginLeftOpen;
+	private Float contentFontSizeValue;
+	private String contentFontSizeUnit;
+	private Boolean contentFontSizeOpen;
+	private String contentDisplay;
 	private Float lineDivWidthValue;
 	private String lineDivWidthUnit;
 	private Boolean lineDivWidthOpen;
