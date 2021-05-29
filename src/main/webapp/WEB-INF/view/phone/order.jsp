@@ -29,13 +29,26 @@ function initTabDiv(){
 	var titleDiv=$("#tab_div #title_div");
 	var itemDiv=titleDiv.find("div[id^='item_div']");
 	itemDiv.click(function(){
-		changeTab($(this).attr("id"));
+		var id=$(this).attr("id").substring(8);
+		changeTab(id);
 	});
 }
 
-function changeTab(itemId){
+function changeTab(id){
+	var cmaList=JSON.parse('${requestScope.childModuleAreaListStr}');
+	var cmad=cmaList[0];
+	$("#tab_div #title_div div[id^='item_div']").css("color","rgb("+cmad.colorRedValue+","+cmad.colorGreenValue+","+cmad.colorBlueValue+")");
+	$("#tab_div #title_div div[id^='item_div'] .line_div").css("border-bottom-color","rgb("+cmad.lineDivBorderBottomWidthColorRedValue+","+cmad.lineDivBorderBottomWidthColorGreenValue+","+cmad.lineDivBorderBottomWidthColorBlueValue+")");
+	for(var i=0;i<cmaList.length;i++){
+		var cma=cmaList[i];
+		if(cma.id==id){
+			$("#tab_div #title_div div[id=item_div"+id+"]").css("color","rgb("+cma.selectedColorRedValue+","+cma.selectedColorGreenValue+","+cma.selectedColorBlueValue+")");
+			$("#tab_div #title_div div[id=item_div"+id+"] .line_div").css("border-bottom-color","rgb("+cma.lineDivSelectedBorderBottomWidthColorRedValue+","+cma.lineDivSelectedBorderBottomWidthColorGreenValue+","+cma.lineDivSelectedBorderBottomWidthColorBlueValue+")");
+		}
+	}
+	
 	$("#tab_div #content_div div[id^='item_div']").css("display","none");
-	$("#tab_div #content_div div[id='"+itemId+"']").css("display","block");
+	$("#tab_div #content_div div[id=item_div"+id+"]").css("display","block");
 }
 
 function initCarouselMapDiv(){
@@ -210,7 +223,7 @@ body{
 			<div class="title_div" id="title_div" style="width:100%;">
 				<c:forEach items="${requestScope.childModuleAreaList }" var="childModuleArea">
 					<c:if test="${childModuleArea.tagType eq 'tabItemDiv'&&childModuleArea.parentId eq moduleArea.id }">
-						<div class="item_div" id="item_div${childModuleArea.sort}" style="
+						<div class="item_div" id="item_div${childModuleArea.id}" style="
 							width:${childModuleArea.widthValue}${childModuleArea.widthUnit};
 							height:${childModuleArea.heightValue}${childModuleArea.heightUnit};
 							line-height:${childModuleArea.lineHeightValue}${childModuleArea.lineHeightUnit};
@@ -222,7 +235,18 @@ body{
 									margin-left:${childModuleArea.marginLeftValue}${childModuleArea.marginLeftUnit};
 								</c:otherwise>
 							</c:choose>
-							color:rgb(${childModuleArea.colorRedValue},${childModuleArea.colorGreenValue},${childModuleArea.colorBlueValue});
+							<c:choose>
+								<c:when test="${childModuleArea.sort eq 1}">
+									color:rgb(${childModuleArea.selectedColorRedValue},
+											  ${childModuleArea.selectedColorGreenValue},
+											  ${childModuleArea.selectedColorBlueValue});
+								</c:when>
+								<c:otherwise>
+									color:rgb(${childModuleArea.colorRedValue},
+											  ${childModuleArea.colorGreenValue},
+											  ${childModuleArea.colorBlueValue});
+								</c:otherwise>
+							</c:choose>
 							text-align: ${childModuleArea.textAlign};">
 							${childModuleArea.value}
 							<div class="line_div" style="
@@ -230,9 +254,18 @@ body{
 							margin:${childModuleArea.lineDivMargin};
 							border-bottom-width:${childModuleArea.lineDivBorderBottomWidthValue}${childModuleArea.lineDivBorderBottomWidthUnit};
 							border-bottom-style:${childModuleArea.lineDivBorderBottomWidthStyle};
-							border-bottom-color:rgb(${childModuleArea.lineDivBorderBottomWidthColorRedValue},
-													${childModuleArea.lineDivBorderBottomWidthColorGreenValue},
-													${childModuleArea.lineDivBorderBottomWidthColorBlueValue});
+							<c:choose>
+								<c:when test="${childModuleArea.sort eq 1}">
+									border-bottom-color:rgb(${childModuleArea.lineDivSelectedBorderBottomWidthColorRedValue},
+															${childModuleArea.lineDivSelectedBorderBottomWidthColorGreenValue},
+															${childModuleArea.lineDivSelectedBorderBottomWidthColorBlueValue});
+								</c:when>
+								<c:otherwise>
+									border-bottom-color:rgb(${childModuleArea.lineDivBorderBottomWidthColorRedValue},
+															${childModuleArea.lineDivBorderBottomWidthColorGreenValue},
+															${childModuleArea.lineDivBorderBottomWidthColorBlueValue});
+								</c:otherwise>
+							</c:choose>
 							"></div>
 						</div>
 					</c:if>
@@ -241,7 +274,7 @@ body{
 			<div id="content_div">
 				<c:forEach items="${requestScope.childModuleAreaList }" var="childModuleArea">
 					<c:if test="${childModuleArea.tagType eq 'tabItemDiv'&&childModuleArea.parentId eq moduleArea.id }">
-						<div id="item_div${childModuleArea.sort}">
+						<div id="item_div${childModuleArea.id}">
 							<c:forEach items="${requestScope.moduleTagList }" var="moduleTag">
 								<c:if test="${childModuleArea.id eq moduleTag.areaId }">
 									<c:if test="${moduleTag.type eq 'div' }">

@@ -28,6 +28,43 @@ public class PhoneController {
 		
 		List<ModuleArea> childModuleAreaList=moduleAreaService.selectPhoneList(ModuleArea.CHILD);
 		request.setAttribute("childModuleAreaList", childModuleAreaList);
+		StringBuilder cmaListSB=new StringBuilder();
+		cmaListSB.append("[");
+		for(int i=0;i<childModuleAreaList.size();i++) {
+			ModuleArea childModuleArea=childModuleAreaList.get(i);
+			cmaListSB.append("{\\\"id\\\":\\\"");
+			cmaListSB.append(childModuleArea.getId());
+			cmaListSB.append("\\\",\\\"colorRedValue\\\":\\\"");
+			cmaListSB.append(childModuleArea.getColorRedValue());
+			cmaListSB.append("\\\",\\\"colorGreenValue\\\":\\\"");
+			cmaListSB.append(childModuleArea.getColorGreenValue());
+			cmaListSB.append("\\\",\\\"colorBlueValue\\\":\\\"");
+			cmaListSB.append(childModuleArea.getColorBlueValue());
+			cmaListSB.append("\\\",\\\"selectedColorRedValue\\\":\\\"");
+			cmaListSB.append(childModuleArea.getSelectedColorRedValue());
+			cmaListSB.append("\\\",\\\"selectedColorGreenValue\\\":\\\"");
+			cmaListSB.append(childModuleArea.getSelectedColorGreenValue());
+			cmaListSB.append("\\\",\\\"selectedColorBlueValue\\\":\\\"");
+			cmaListSB.append(childModuleArea.getSelectedColorBlueValue());
+			cmaListSB.append("\\\",\\\"lineDivBorderBottomWidthColorRedValue\\\":\\\"");
+			cmaListSB.append(childModuleArea.getLineDivBorderBottomWidthColorRedValue());
+			cmaListSB.append("\\\",\\\"lineDivBorderBottomWidthColorGreenValue\\\":\\\"");
+			cmaListSB.append(childModuleArea.getLineDivBorderBottomWidthColorGreenValue());
+			cmaListSB.append("\\\",\\\"lineDivBorderBottomWidthColorBlueValue\\\":\\\"");
+			cmaListSB.append(childModuleArea.getLineDivBorderBottomWidthColorBlueValue());
+			cmaListSB.append("\\\",\\\"lineDivSelectedBorderBottomWidthColorRedValue\\\":\\\"");
+			cmaListSB.append(childModuleArea.getLineDivSelectedBorderBottomWidthColorRedValue());
+			cmaListSB.append("\\\",\\\"lineDivSelectedBorderBottomWidthColorGreenValue\\\":\\\"");
+			cmaListSB.append(childModuleArea.getLineDivSelectedBorderBottomWidthColorGreenValue());
+			cmaListSB.append("\\\",\\\"lineDivSelectedBorderBottomWidthColorBlueValue\\\":\\\"");
+			cmaListSB.append(childModuleArea.getLineDivSelectedBorderBottomWidthColorBlueValue());
+			cmaListSB.append("\\\"}");
+			if(i<childModuleAreaList.size()-1)
+				cmaListSB.append(",");
+		}
+		cmaListSB.append("]");
+		//System.out.println(cmaListSB.toString());
+		request.setAttribute("childModuleAreaListStr", cmaListSB.toString());
 		
 		List<ModuleTag> moduleTagList=moduleTagService.selectPhoneList();
 		request.setAttribute("moduleTagList", moduleTagList);
