@@ -235,6 +235,12 @@ public class ModuleArea {
 	public void setBorderBottomColorOpen(Boolean borderBottomColorOpen) {
 		this.borderBottomColorOpen = borderBottomColorOpen;
 	}
+	public String getDisplay() {
+		return display;
+	}
+	public void setDisplay(String display) {
+		this.display = display;
+	}
 	public Float getTitleWidthValue() {
 		return titleWidthValue;
 	}
@@ -289,6 +295,30 @@ public class ModuleArea {
 	public void setTitleLineHeightOpen(Boolean titleLineHeightOpen) {
 		this.titleLineHeightOpen = titleLineHeightOpen;
 	}
+	public Integer getTitleColorRedValue() {
+		return titleColorRedValue;
+	}
+	public void setTitleColorRedValue(Integer titleColorRedValue) {
+		this.titleColorRedValue = titleColorRedValue;
+	}
+	public Integer getTitleColorGreenValue() {
+		return titleColorGreenValue;
+	}
+	public void setTitleColorGreenValue(Integer titleColorGreenValue) {
+		this.titleColorGreenValue = titleColorGreenValue;
+	}
+	public Integer getTitleColorBlueValue() {
+		return titleColorBlueValue;
+	}
+	public void setTitleColorBlueValue(Integer titleColorBlueValue) {
+		this.titleColorBlueValue = titleColorBlueValue;
+	}
+	public Boolean getTitleColorOpen() {
+		return titleColorOpen;
+	}
+	public void setTitleColorOpen(Boolean titleColorOpen) {
+		this.titleColorOpen = titleColorOpen;
+	}
 	public Integer getTitleFontSize() {
 		return titleFontSize;
 	}
@@ -336,6 +366,30 @@ public class ModuleArea {
 	}
 	public void setContentMarginLeftOpen(Boolean contentMarginLeftOpen) {
 		this.contentMarginLeftOpen = contentMarginLeftOpen;
+	}
+	public Integer getContentColorRedValue() {
+		return contentColorRedValue;
+	}
+	public void setContentColorRedValue(Integer contentColorRedValue) {
+		this.contentColorRedValue = contentColorRedValue;
+	}
+	public Integer getContentColorGreenValue() {
+		return contentColorGreenValue;
+	}
+	public void setContentColorGreenValue(Integer contentColorGreenValue) {
+		this.contentColorGreenValue = contentColorGreenValue;
+	}
+	public Integer getContentColorBlueValue() {
+		return contentColorBlueValue;
+	}
+	public void setContentColorBlueValue(Integer contentColorBlueValue) {
+		this.contentColorBlueValue = contentColorBlueValue;
+	}
+	public Boolean getContentColorOpen() {
+		return contentColorOpen;
+	}
+	public void setContentColorOpen(Boolean contentColorOpen) {
+		this.contentColorOpen = contentColorOpen;
 	}
 	public Float getContentFontSizeValue() {
 		return contentFontSizeValue;
@@ -525,6 +579,7 @@ public class ModuleArea {
 	private Integer borderBottomColorBlueValue;
 	private Float borderBottomColorAlphaValue;
 	private Boolean borderBottomColorOpen;
+	private String display;
 	private Float titleWidthValue;
 	private String titleWidthUnit;
 	private Boolean titleWidthOpen;
@@ -534,6 +589,10 @@ public class ModuleArea {
 	private Float titleLineHeightValue;
 	private String titleLineHeightUnit;
 	private Boolean titleLineHeightOpen;
+	private Integer titleColorRedValue;
+	private Integer titleColorGreenValue;
+	private Integer titleColorBlueValue;
+	private Boolean titleColorOpen;
 	private Integer titleFontSize;
 	private Boolean titleFontSizeOpen;
 	private Float contentLineHeightValue;
@@ -542,6 +601,10 @@ public class ModuleArea {
 	private Float contentMarginLeftValue;
 	private String contentMarginLeftUnit;
 	private Boolean contentMarginLeftOpen;
+	private Integer contentColorRedValue;
+	private Integer contentColorGreenValue;
+	private Integer contentColorBlueValue;
+	private Boolean contentColorOpen;
 	private Float contentFontSizeValue;
 	private String contentFontSizeUnit;
 	private Boolean contentFontSizeOpen;

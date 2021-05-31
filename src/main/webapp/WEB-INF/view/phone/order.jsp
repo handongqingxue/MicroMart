@@ -51,7 +51,7 @@ function initTabDiv(){
 		var id=$(this).attr("id").substring(8);
 		changeTab(id);
 	});
-	changeTab(6);
+	//changeTab(6);
 }
 
 function changeTab(id){
@@ -314,7 +314,7 @@ body{
 			<div id="content_div">
 				<c:forEach items="${requestScope.childModuleAreaList }" var="childModuleArea">
 					<c:if test="${childModuleArea.tagType eq 'tabItemDiv'&&childModuleArea.parentId eq moduleArea.id }">
-						<div id="item_div${childModuleArea.id}">
+						<div id="item_div${childModuleArea.id}" style="display:${childModuleArea.display};">
 							<c:forEach items="${requestScope.childModuleAreaList }" var="helpModuleArea">
 								<c:if test="${helpModuleArea.parentId eq childModuleArea.id }">
 									<div class="help_list_div" id="help_list_div" style="
@@ -323,50 +323,62 @@ body{
 									margin-bottom: ${helpModuleArea.marginBottomValue}${helpModuleArea.marginBottomUnit};
 									</c:if>">
 										<c:forEach items="${requestScope.childModuleAreaList }" var="helpChildModuleArea">
-											<c:if test="${helpChildModuleArea.parentId eq helpModuleArea.id }">
-												<div class="help_item_div" id="help_item_div1" style="
-												width:${helpChildModuleArea.widthValue}${helpChildModuleArea.widthUnit};
-												border-bottom-width: ${helpChildModuleArea.borderBottomWidthValue}${helpChildModuleArea.borderBottomWidthUnit};
-												border-bottom-style:${helpChildModuleArea.borderBottomStyle};
-												<c:if test="${helpChildModuleArea.borderBottomColorOpen}">
-													border-bottom-color:rgba(${helpChildModuleArea.borderBottomColorRedValue},
-																			${helpChildModuleArea.borderBottomColorGreenValue},
-																			${helpChildModuleArea.borderBottomColorBlueValue},
-																			${helpChildModuleArea.borderBottomColorAlphaValue});
-												</c:if>">
-													<div id="help_title_div" style="
-													<c:if test="${helpChildModuleArea.titleWidthOpen}">
-														width:${helpChildModuleArea.titleWidthValue}${helpChildModuleArea.titleWidthUnit};
-													</c:if>
-													<c:if test="${helpChildModuleArea.titleHeightOpen}">
-														height:${helpChildModuleArea.titleHeightValue}${helpChildModuleArea.titleHeightUnit};
-													</c:if>
-													<c:if test="${helpChildModuleArea.titleLineHeightOpen}">
-														line-height:${helpChildModuleArea.titleLineHeightValue}${helpChildModuleArea.titleLineHeightUnit};
-													</c:if>
-													<c:if test="${helpChildModuleArea.titleFontSizeOpen}">
-														font-size: ${helpChildModuleArea.titleFontSize}px;
-													</c:if>
-													">
-														1. 我的订单大概多久发货？
-														<div class="pointer_div close_div" id="pointer_div1"></div>
+											<c:forEach items="${requestScope.helpList }" var="help">
+												<c:if test="${helpChildModuleArea.parentId eq helpModuleArea.id }">
+													<div class="help_item_div" id="help_item_div${help.sort }" style="
+													width:${helpChildModuleArea.widthValue}${helpChildModuleArea.widthUnit};
+													border-bottom-width: ${helpChildModuleArea.borderBottomWidthValue}${helpChildModuleArea.borderBottomWidthUnit};
+													border-bottom-style:${helpChildModuleArea.borderBottomStyle};
+													<c:if test="${helpChildModuleArea.borderBottomColorOpen}">
+														border-bottom-color:rgba(${helpChildModuleArea.borderBottomColorRedValue},
+																				${helpChildModuleArea.borderBottomColorGreenValue},
+																				${helpChildModuleArea.borderBottomColorBlueValue},
+																				${helpChildModuleArea.borderBottomColorAlphaValue});
+													</c:if>">
+														<div id="help_title_div" style="
+														<c:if test="${helpChildModuleArea.titleWidthOpen}">
+															width:${helpChildModuleArea.titleWidthValue}${helpChildModuleArea.titleWidthUnit};
+														</c:if>
+														<c:if test="${helpChildModuleArea.titleHeightOpen}">
+															height:${helpChildModuleArea.titleHeightValue}${helpChildModuleArea.titleHeightUnit};
+														</c:if>
+														<c:if test="${helpChildModuleArea.titleLineHeightOpen}">
+															line-height:${helpChildModuleArea.titleLineHeightValue}${helpChildModuleArea.titleLineHeightUnit};
+														</c:if>
+														<c:if test="${helpChildModuleArea.titleColorOpen}">
+															color: rgb(${helpChildModuleArea.titleColorRedValue},
+																	   ${helpChildModuleArea.titleColorGreenValue},
+																	   ${helpChildModuleArea.titleColorBlueValue});
+														</c:if>
+														<c:if test="${helpChildModuleArea.titleFontSizeOpen}">
+															font-size: ${helpChildModuleArea.titleFontSize}px;
+														</c:if>
+														">
+															${help.sort }. ${help.question }
+															<div class="pointer_div close_div" id="pointer_div${help.sort }"></div>
+														</div>
+														<div id="help_content_div" style="
+														<c:if test="${helpChildModuleArea.contentLineHeightOpen}">
+															line-height: ${helpChildModuleArea.contentLineHeightValue}${helpChildModuleArea.contentLineHeightUnit};
+														</c:if>
+														<c:if test="${helpChildModuleArea.contentMarginLeftOpen}">
+															margin-left: ${helpChildModuleArea.contentMarginLeftValue}${helpChildModuleArea.contentMarginLeftUnit};
+														</c:if>
+														<c:if test="${helpChildModuleArea.contentColorOpen}">
+															color: rgb(${helpChildModuleArea.contentColorRedValue},
+																	   ${helpChildModuleArea.contentColorGreenValue},
+																	   ${helpChildModuleArea.contentColorBlueValue});
+														</c:if>
+														<c:if test="${helpChildModuleArea.contentFontSizeOpen}">
+															font-size: ${helpChildModuleArea.contentFontSizeValue}${helpChildModuleArea.contentFontSizeUnit};
+														</c:if>
+														display: ${helpChildModuleArea.contentDisplay};
+														">
+															${help.answer }
+														</div>
 													</div>
-													<div id="help_content_div" style="
-													<c:if test="${helpChildModuleArea.contentLineHeightOpen}">
-														line-height: ${helpChildModuleArea.contentLineHeightValue}${helpChildModuleArea.contentLineHeightUnit};
-													</c:if>
-													<c:if test="${helpChildModuleArea.contentMarginLeftOpen}">
-														margin-left: ${helpChildModuleArea.contentMarginLeftValue}${helpChildModuleArea.contentMarginLeftUnit};
-													</c:if>
-													<c:if test="${helpChildModuleArea.contentFontSizeOpen}">
-														font-size: ${helpChildModuleArea.contentFontSizeValue}${helpChildModuleArea.contentFontSizeUnit};
-													</c:if>
-													display: ${helpChildModuleArea.contentDisplay};
-													">
-													订单的发货时间为您下单之后的72小时内，请您耐心等待，订单状态及物流进度可在下单成功后的短信内容中查看，普通地区异地物流运转3-5天左右，偏远地区异地物流运转时间5-7天左右，如遇特殊情况将会导致延误，以物流官网进度为准。若您的订单超出72小时仍未发货，建议您联系商家进行咨询。
-													</div>
-												</div>
-											</c:if>
+												</c:if>
+											</c:forEach>
 										</c:forEach>
 									</div>
 								</c:if>
@@ -401,52 +413,5 @@ body{
 		</div>
 	</c:if>
 </c:forEach>
-<div class="tab_div" id="tab_div" style="width:100%;">
-	<div class="title_div" id="title_div" style="width:100%;">
-	
-		<div class="item_div" id="item_div1" style="width:50%;height:50px;line-height:50px;color:rgb(235,25,58);text-align: center;">
-			商品详情
-			<div class="line_div" style="width:40%;margin:auto;border-bottom: 2px solid #EB193A;"></div>
-		</div>
-		<div class="item_div" id="item_div2" style="width:50%;height:50px;line-height:50px;margin-top:-50px;margin-left:50%;color:rgb(51,51,51);text-align: center;">
-			常见帮助
-			<div class="line_div" style="width:40%;margin:auto;border-bottom: 2px solid #fff;"></div>
-		</div>
-		
-	</div>
-	<div id="content_div">
-	
-		<div id="item_div1" style="">
-			<div style="width:90%;margin: auto;margin-top:20px;color:rgb(0,102,204);font-weight: bold;">住了几十年的老房子，屋顶、窗台有裂缝，到处漏水、渗水。屋外大雨，屋里小雨，苦不堪言！</div>
-			<div style="width:70%;margin: auto;color:rgb(255,255,0);font-weight: bold;text-align:center;background-color: rgb(230,0,0);">补漏丁基材质胶布，横空出世！</div>
-			<embed src="<%=basePath %>resource/embed/202105270001.mp4"/>
-		</div>
-		<div id="item_div2" style="display: none;">
-			<div class="help_list_div" id="help_list_div" style="width:100%;margin-bottom: 10px;">
-				<div class="help_item_div" id="help_item_div1" style="width:100%;border-bottom: 1px solid rgba(0,0,0,0.1);">
-					<div id="help_title_div" style="width:100%;height:40px;line-height:40px;font-size: 16px;">
-						1. 我的订单大概多久发货？
-						<div class="pointer_div close_div" id="pointer_div1"></div>
-					</div>
-					<div id="help_content_div" style="line-height: 30px;margin-left: 16px;font-size: 14px;display: none;">
-					订单的发货时间为您下单之后的72小时内，请您耐心等待，订单状态及物流进度可在下单成功后的短信内容中查看，普通地区异地物流运转3-5天左右，偏远地区异地物流运转时间5-7天左右，如遇特殊情况将会导致延误，以物流官网进度为准。若您的订单超出72小时仍未发货，建议您联系商家进行咨询。
-					</div>
-				</div>
-				<div class="help_item_div" id="help_item_div2" style="width:100%;border-bottom: 1px solid rgba(0,0,0,0.1);">
-					<div id="help_title_div" style="width:100%;height:40px;line-height:40px;font-size: 16px;">
-						2. 我的订单如何申请退换货？
-						<div class="pointer_div close_div" id="pointer_div2"></div>
-					</div>
-					<div id="help_content_div" style="line-height: 30px;margin-left: 16px;font-size: 14px;display: none;">
-					若您需要办理退换货，无需对订单进行任何操作，请您及时联系商家协商退换货事宜，向商家索取商品寄回地址信息，将商品寄回至商家处，并向商家提供商品寄回有效物流单号，由商家为您安排退换货。
-换货要求：保证商品全新，不影响二次销售，商品包装完好，附件、赠品齐全。在寄回包裹中放置小纸条注明您的联系方式、订单号，禁止使用“到付”运费支付形式将商品寄回。
-退换货运费说明：交易中的运费争议，根据“谁过错，谁承担”的原则处理，但买卖双方协商一致的除外。 
-					</div>
-				</div>
-			</div>
-		</div>
-		
-	</div>
-</div>
 </body>
 </html>

@@ -19,6 +19,8 @@ public class PhoneController {
 	private ModuleAreaService moduleAreaService;
 	@Autowired
 	private ModuleTagService moduleTagService;
+	@Autowired
+	private HelpService helpService;
 	
 	@RequestMapping(value="/order")
 	public String order(HttpServletRequest request) {
@@ -68,6 +70,9 @@ public class PhoneController {
 		
 		List<ModuleTag> moduleTagList=moduleTagService.selectPhoneList();
 		request.setAttribute("moduleTagList", moduleTagList);
+
+		List<Help> helpList=helpService.selectPhoneList(1);
+		request.setAttribute("helpList", helpList);
 		
 		return "/phone/order";
 	}

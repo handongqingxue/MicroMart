@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.microMart.dao.HelpMapper">
+	<select id="selectPhoneList" resultType="com.microMart.entity.Help">
+		select * from help where ifShow=1
+		<if test="merchantId!=null&amp;merchantId!=''">
+			and merchantId=#{merchantId}
+		</if>
+	</select>
+</mapper>
