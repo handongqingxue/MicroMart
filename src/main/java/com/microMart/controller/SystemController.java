@@ -12,7 +12,7 @@ public class SystemController {
 	public static final String MODULE_NAME="/background/system";
 	
 	@RequestMapping(value="/merchant/info")
-	public String goSystemMerInfo() {
+	public String goSystemMerchantInfo() {
 		
 		return MODULE_NAME+"/merchant/info";
 	}

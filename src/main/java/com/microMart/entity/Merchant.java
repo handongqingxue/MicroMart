@@ -9,11 +9,12 @@ public class Merchant {
 	private String phone;
 	private String email;
 	private Integer role;
-	private String avatarImg;
+	private String logo;
+	private String contactTel;
 	private String createTime;
-	private String companyName;
-	private String companyAddress;
-
+	private String shopName;
+	private String shopAddress;
+	
 	public Merchant(String userName,String password) {
 		this.userName=userName;
 		this.password=password;
@@ -63,11 +64,17 @@ public class Merchant {
 	public void setRole(Integer role) {
 		this.role = role;
 	}
-	public String getAvatarImg() {
-		return avatarImg;
+	public String getLogo() {
+		return logo;
 	}
-	public void setAvatarImg(String avatarImg) {
-		this.avatarImg = avatarImg;
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+	public String getContactTel() {
+		return contactTel;
+	}
+	public void setContactTel(String contactTel) {
+		this.contactTel = contactTel;
 	}
 	public String getCreateTime() {
 		return createTime;
@@ -75,16 +82,16 @@ public class Merchant {
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-	public String getCompanyName() {
-		return companyName;
+	public String getShopName() {
+		return shopName;
 	}
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
 	}
-	public String getCompanyAddress() {
-		return companyAddress;
+	public String getShopAddress() {
+		return shopAddress;
 	}
-	public void setCompanyAddress(String companyAddress) {
-		this.companyAddress = companyAddress;
+	public void setShopAddress(String shopAddress) {
+		this.shopAddress = shopAddress;
 	}
 }
