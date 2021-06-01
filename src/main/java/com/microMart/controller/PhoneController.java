@@ -1,6 +1,8 @@
 package com.microMart.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,6 +23,8 @@ public class PhoneController {
 	private ModuleTagService moduleTagService;
 	@Autowired
 	private HelpService helpService;
+	@Autowired
+	private ComboService comboService;
 	
 	@RequestMapping(value="/order")
 	public String order(HttpServletRequest request) {
@@ -73,6 +77,18 @@ public class PhoneController {
 
 		List<Help> helpList=helpService.selectPhoneList(1);
 		request.setAttribute("helpList", helpList);
+		
+		List<Combo> comboList=comboService.selectPhoneList(1);
+		request.setAttribute("comboList", comboList);
+		
+		Map<Integer, ModuleTag> comboModuleTagMap=new HashMap<Integer, ModuleTag>();
+		for(int i=0;i<moduleTagList.size();i++) {
+			ModuleTag comboModuleTag = moduleTagList.get(i);
+			if("comboItem".equals(comboModuleTag.getType())) {
+				comboModuleTagMap.put(comboModuleTag.getId(), comboModuleTag);
+			}
+		}
+		request.setAttribute("comboModuleTagMap", comboModuleTagMap);
 		
 		return "/phone/order";
 	}

@@ -55,6 +55,12 @@ public class ModuleArea {
 	public void setHeightUnit(String heightUnit) {
 		this.heightUnit = heightUnit;
 	}
+	public Boolean getHeightOpen() {
+		return heightOpen;
+	}
+	public void setHeightOpen(Boolean heightOpen) {
+		this.heightOpen = heightOpen;
+	}
 	public Float getLineHeightValue() {
 		return lineHeightValue;
 	}
@@ -549,6 +555,7 @@ public class ModuleArea {
 	private String widthUnit;//区域宽度单位 % px
 	private Float heightValue;//区域高度值
 	private String heightUnit;//区域高度单位 % px
+	private Boolean heightOpen;
 	private Float lineHeightValue;
 	private String lineHeightUnit;
 	private Float marginTopValue;

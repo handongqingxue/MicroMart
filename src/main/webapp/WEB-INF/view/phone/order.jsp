@@ -216,7 +216,10 @@ body{
 <c:forEach items="${requestScope.moduleAreaList }" var="moduleArea">
 	<c:if test="${moduleArea.tagType eq 'cmImg' }">
 		<div class="cm_img_div" id="cm_img_div">
-			<div class="cmi_list_div" id="cmi_list_div" style="width:100%;height: 365px;">
+			<div class="cmi_list_div" id="cmi_list_div" style="
+			width:100%;
+			<c:if test="${moduleArea.heightOpen}">height: ${moduleArea.heightValue}${moduleArea.heightUnit};</c:if>
+			">
 				<c:forEach items="${requestScope.moduleTagList }" var="moduleTag">
 					<c:if test="${moduleTag.areaId eq moduleArea.id}">
 						<img class="item_img" alt="" src="<%=basePath%>${moduleTag.value}" style="margin-left:${(moduleTag.sort-1)*100}%;">
@@ -229,28 +232,48 @@ body{
 	</c:if>
 	<c:if test="${moduleArea.tagType eq 'div' }">
 		<div style="width:${moduleArea.widthValue}${moduleArea.widthUnit};
-					height:${moduleArea.heightValue}${moduleArea.heightUnit};
-					<c:if test="${moduleArea.marginOpen}">margin:${moduleArea.margin}</c:if>"
+					<c:if test="${moduleArea.heightOpen}">height:${moduleArea.heightValue}${moduleArea.heightUnit};</c:if>
+					<c:if test="${moduleArea.marginOpen}">margin:${moduleArea.margin};</c:if>
+					<c:if test="${moduleArea.borderBottomColorOpen}">
+						border-bottom-color:rgba(${moduleArea.borderBottomColorRedValue},
+						${moduleArea.borderBottomColorGreenValue},
+						${moduleArea.borderBottomColorBlueValue},
+						${moduleArea.borderBottomColorAlphaValue});
+					</c:if>"
 		>
 			<c:forEach items="${requestScope.moduleTagList }" var="moduleTag">
 				<c:if test="${moduleArea.id eq moduleTag.areaId }">
 					<c:if test="${moduleTag.type eq 'img' }">
-						<img alt="" src="<%=basePath%>${moduleTag.value}" style="width:${moduleTag.widthValue}${moduleTag.widthUnit};
-						height:${moduleTag.heightValue}${moduleTag.heightUnit};
+						<img alt="" src="<%=basePath%>${moduleTag.value}" style="
+						<c:if test="${moduleTag.widthOpen}">width:${moduleTag.widthValue}${moduleTag.widthUnit};</c:if>
+						<c:if test="${moduleTag.heightOpen}">height:${moduleTag.heightValue}${moduleTag.heightUnit};</c:if>
 						<c:if test='${moduleTag.marginLeftOpen}'>margin-left:${moduleTag.marginLeftValue}${moduleTag.marginLeftUnit};</c:if>
 						<c:if test='${moduleTag.marginTopOpen}'>margin-top:${moduleTag.marginTopValue}${moduleTag.marginTopUnit};</c:if>
 						">
 					</c:if>
-					<c:if test="${moduleTag.type eq 'span' }">
+					<c:if test="${moduleTag.type eq 'span'||moduleTag.type eq 'div' }">
 						<${moduleTag.type} style="
-						<c:if test='${moduleTag.colorOpen}'>color:rgb(${moduleTag.colorRedValue},${moduleTag.colorGreenValue},${moduleTag.colorBlueValue});</c:if>
-						<c:if test='${moduleTag.fontSizeOpen}'>font-size:${moduleTag.fontSize}px;</c:if>
-						<c:if test='${moduleTag.backgroundColorOpen}'>background-color:rgb(${moduleTag.backgroundColorRedValue},${moduleTag.backgroundColorGreenValue},${moduleTag.backgroundColorBlueValue});</c:if>
+						<c:if test="${moduleTag.widthOpen}">width:${moduleTag.widthValue}${moduleTag.widthUnit};</c:if>
+						<c:if test="${moduleTag.heightOpen}">height:${moduleTag.heightValue}${moduleTag.heightUnit};</c:if>
+						<c:if test="${moduleTag.lineHeightOpen}">line-height:${moduleTag.lineHeightValue}${moduleTag.lineHeightUnit};</c:if>
+						<c:if test='${moduleTag.marginTopOpen}'>margin-top:${moduleTag.marginTopValue}${moduleTag.marginTopUnit};</c:if>
+						<c:if test='${moduleTag.marginLeftOpen}'>margin-left:${moduleTag.marginLeftValue}${moduleTag.marginLeftUnit};</c:if>
 						<c:if test='${moduleTag.paddingTopOpen}'>padding-top:${moduleTag.paddingTop}px;</c:if>
 						<c:if test='${moduleTag.paddingRightOpen}'>padding-right:${moduleTag.paddingRight}px;</c:if>
 						<c:if test='${moduleTag.paddingBottomOpen}'>padding-bottom:${moduleTag.paddingBottom}px;</c:if>
 						<c:if test='${moduleTag.paddingLeftOpen}'>padding-left:${moduleTag.paddingLeft}px;</c:if>
+						<c:if test="${moduleTag.colorOpen}">color:rgb(${moduleTag.colorRedValue},${moduleTag.colorGreenValue},${moduleTag.colorBlueValue});</c:if>
+						<c:if test='${moduleTag.fontSizeOpen}'>font-size:${moduleTag.fontSize}px;</c:if>
+						<c:if test='${moduleTag.fontWeightOpen}'>font-weight:${moduleTag.fontWeight};</c:if>
+						<c:if test='${moduleTag.textAlignOpen}'>text-align:${moduleTag.textAlign};</c:if>
+						<c:if test='${moduleTag.backgroundColorOpen}'>background-color:rgb(${moduleTag.backgroundColorRedValue},${moduleTag.backgroundColorGreenValue},${moduleTag.backgroundColorBlueValue});</c:if>
+						<c:if test='${moduleTag.borderTopWidthOpen}'>border-top:${moduleTag.borderTopWidthValue}${moduleTag.borderTopWidthUnit};</c:if>
+						<c:if test='${moduleTag.borderTopStyleOpen}'>border-style:${moduleTag.borderTopStyle};</c:if>
+						<c:if test='${moduleTag.borderTopColorOpen}'>border-top-color:rgb(${moduleTag.borderTopColorRedValue},
+																						  ${moduleTag.borderTopColorGreenValue},
+																						  ${moduleTag.borderTopColorBlueValue});</c:if>
 						<c:if test='${moduleTag.borderRadiusOpen}'>border-radius:${moduleTag.borderRadius}px;</c:if>
+						<c:if test='${moduleTag.positionOpen}'>position:${moduleTag.position};</c:if>
 						">${moduleTag.value}</${moduleTag.type}>
 					</c:if>
 				</c:if>
@@ -387,7 +410,7 @@ body{
 								<c:if test="${childModuleArea.id eq moduleTag.areaId }">
 									<c:if test="${moduleTag.type eq 'div' }">
 										<${moduleTag.type} style="
-										width:${moduleTag.widthValue}${moduleTag.widthUnit};
+										<c:if test="${moduleTag.widthOpen}">width:${moduleTag.widthValue}${moduleTag.widthUnit};</c:if>
 										<c:if test="${moduleTag.marginOpen}">margin:${moduleTag.margin};</c:if>
 										<c:if test="${moduleTag.marginTopOpen}">margin-top:${moduleTag.marginTopValue}${moduleTag.marginTopUnit};</c:if>
 										<c:if test="${moduleTag.colorOpen}">color:rgb(${moduleTag.colorRedValue},${moduleTag.colorGreenValue},${moduleTag.colorBlueValue});</c:if>
@@ -401,7 +424,7 @@ body{
 									</c:if>
 									<c:if test="${moduleTag.type eq 'img'||moduleTag.type eq 'embed' }">
 										<${moduleTag.type} alt="" src="<%=basePath%>${moduleTag.value}" style="
-										width:${moduleTag.widthValue}${moduleTag.widthUnit};
+										<c:if test="${moduleTag.widthOpen}">width:${moduleTag.widthValue}${moduleTag.widthUnit};</c:if>
 										">
 									</c:if>
 								</c:if>
@@ -410,6 +433,60 @@ body{
 					</c:if>
 				</c:forEach>
 			</div>
+		</div>
+	</c:if>
+	<c:if test="${moduleArea.tagType eq 'comboDiv' }">
+		<div class="combo_div" id="combo_div" style="
+			width:${moduleArea.widthValue}${moduleArea.widthUnit};
+			<c:if test="${moduleArea.marginOpen}">margin:${moduleArea.margin};</c:if>
+		"
+		>
+			<c:forEach items="${requestScope.moduleTagList }" var="comboTag">
+				<c:if test="${comboTag.type eq 'comboTit'}">
+					<c:if test="${comboTag.areaId eq moduleArea.id }">
+						<div style="
+						<c:if test="${comboTag.widthOpen}">width:${comboTag.widthValue}${comboTag.widthUnit};</c:if>
+						<c:if test="${comboTag.lineHeightOpen}">line-height:${comboTag.lineHeightValue}${comboTag.lineHeightUnit};</c:if>
+						">${comboTag.value}</div>
+					</c:if>
+				</c:if>
+				<c:if test="${comboTag.type eq 'comboList'}">
+					<c:if test="${comboTag.areaId eq moduleArea.id }">
+						<c:forEach items="${requestScope.comboList }" var="combo">
+							<div style="
+							<c:if test="${requestScope.comboModuleTagMap[combo.tagId].widthOpen}">
+								width:${requestScope.comboModuleTagMap[combo.tagId].widthValue}${requestScope.comboModuleTagMap[combo.tagId].widthUnit};
+							</c:if>
+							<c:if test="${requestScope.comboModuleTagMap[combo.tagId].colorOpen}">
+								color:rgb(${requestScope.comboModuleTagMap[combo.tagId].colorRedValue},
+										${requestScope.comboModuleTagMap[combo.tagId].colorGreenValue},
+										${requestScope.comboModuleTagMap[combo.tagId].colorBlueValue});
+							</c:if>
+							<c:if test="${requestScope.comboModuleTagMap[combo.tagId].fontSizeOpen}">
+								font-size:${requestScope.comboModuleTagMap[combo.tagId].fontSize}px;
+							</c:if>
+							<c:if test="${requestScope.comboModuleTagMap[combo.tagId].backgroundColorOpen}">
+								background-color:rgb(${requestScope.comboModuleTagMap[combo.tagId].backgroundColorRedValue},
+													${requestScope.comboModuleTagMap[combo.tagId].backgroundColorGreenValue},
+													${requestScope.comboModuleTagMap[combo.tagId].backgroundColorBlueValue});
+							</c:if>
+							<c:if test="${requestScope.comboModuleTagMap[combo.tagId].borderWidthOpen}">
+								border-width:${requestScope.comboModuleTagMap[combo.tagId].borderWidthValue}${requestScope.comboModuleTagMap[combo.tagId].borderWidthUnit};
+							</c:if>
+							<c:if test="${requestScope.comboModuleTagMap[combo.tagId].borderStyleOpen}">
+								border-style:${requestScope.comboModuleTagMap[combo.tagId].borderStyle};
+							</c:if>
+							<c:if test="${requestScope.comboModuleTagMap[combo.tagId].borderColorOpen}">
+								border-color:rgb(${requestScope.comboModuleTagMap[combo.tagId].borderColorRedValue},
+												${requestScope.comboModuleTagMap[combo.tagId].borderColorGreenValue},
+												${requestScope.comboModuleTagMap[combo.tagId].borderColorBlueValue});
+							</c:if>
+								border-radius:${requestScope.comboModuleTagMap[combo.tagId].borderRadius}px;
+							">${combo.name }</div>
+						</c:forEach>
+					</c:if>
+				</c:if>
+			</c:forEach>
 		</div>
 	</c:if>
 </c:forEach>

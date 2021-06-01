@@ -33,6 +33,12 @@ public class ModuleTag {
 	public void setWidthUnit(String widthUnit) {
 		this.widthUnit = widthUnit;
 	}
+	public Boolean getWidthOpen() {
+		return widthOpen;
+	}
+	public void setWidthOpen(Boolean widthOpen) {
+		this.widthOpen = widthOpen;
+	}
 	public Float getHeightValue() {
 		return heightValue;
 	}
@@ -44,6 +50,30 @@ public class ModuleTag {
 	}
 	public void setHeightUnit(String heightUnit) {
 		this.heightUnit = heightUnit;
+	}
+	public Boolean getHeightOpen() {
+		return heightOpen;
+	}
+	public void setHeightOpen(Boolean heightOpen) {
+		this.heightOpen = heightOpen;
+	}
+	public Float getLineHeightValue() {
+		return lineHeightValue;
+	}
+	public void setLineHeightValue(Float lineHeightValue) {
+		this.lineHeightValue = lineHeightValue;
+	}
+	public String getLineHeightUnit() {
+		return lineHeightUnit;
+	}
+	public void setLineHeightUnit(String lineHeightUnit) {
+		this.lineHeightUnit = lineHeightUnit;
+	}
+	public Boolean getLineHeightOpen() {
+		return lineHeightOpen;
+	}
+	public void setLineHeightOpen(Boolean lineHeightOpen) {
+		this.lineHeightOpen = lineHeightOpen;
 	}
 	public Float getMarginLeftValue() {
 		return marginLeftValue;
@@ -225,6 +255,114 @@ public class ModuleTag {
 	public void setBackgroundColorOpen(Boolean backgroundColorOpen) {
 		this.backgroundColorOpen = backgroundColorOpen;
 	}
+	public Float getBorderTopWidthValue() {
+		return borderTopWidthValue;
+	}
+	public void setBorderTopWidthValue(Float borderTopWidthValue) {
+		this.borderTopWidthValue = borderTopWidthValue;
+	}
+	public String getBorderTopWidthUnit() {
+		return borderTopWidthUnit;
+	}
+	public void setBorderTopWidthUnit(String borderTopWidthUnit) {
+		this.borderTopWidthUnit = borderTopWidthUnit;
+	}
+	public Boolean getBorderTopWidthOpen() {
+		return borderTopWidthOpen;
+	}
+	public void setBorderTopWidthOpen(Boolean borderTopWidthOpen) {
+		this.borderTopWidthOpen = borderTopWidthOpen;
+	}
+	public String getBorderTopStyle() {
+		return borderTopStyle;
+	}
+	public void setBorderTopStyle(String borderTopStyle) {
+		this.borderTopStyle = borderTopStyle;
+	}
+	public Boolean getBorderTopStyleOpen() {
+		return borderTopStyleOpen;
+	}
+	public void setBorderTopStyleOpen(Boolean borderTopStyleOpen) {
+		this.borderTopStyleOpen = borderTopStyleOpen;
+	}
+	public Integer getBorderTopColorRedValue() {
+		return borderTopColorRedValue;
+	}
+	public void setBorderTopColorRedValue(Integer borderTopColorRedValue) {
+		this.borderTopColorRedValue = borderTopColorRedValue;
+	}
+	public Integer getBorderTopColorGreenValue() {
+		return borderTopColorGreenValue;
+	}
+	public void setBorderTopColorGreenValue(Integer borderTopColorGreenValue) {
+		this.borderTopColorGreenValue = borderTopColorGreenValue;
+	}
+	public Integer getBorderTopColorBlueValue() {
+		return borderTopColorBlueValue;
+	}
+	public void setBorderTopColorBlueValue(Integer borderTopColorBlueValue) {
+		this.borderTopColorBlueValue = borderTopColorBlueValue;
+	}
+	public Boolean getBorderTopColorOpen() {
+		return borderTopColorOpen;
+	}
+	public void setBorderTopColorOpen(Boolean borderTopColorOpen) {
+		this.borderTopColorOpen = borderTopColorOpen;
+	}
+	public Float getBorderWidthValue() {
+		return borderWidthValue;
+	}
+	public void setBorderWidthValue(Float borderWidthValue) {
+		this.borderWidthValue = borderWidthValue;
+	}
+	public String getBorderWidthUnit() {
+		return borderWidthUnit;
+	}
+	public void setBorderWidthUnit(String borderWidthUnit) {
+		this.borderWidthUnit = borderWidthUnit;
+	}
+	public Boolean getBorderWidthOpen() {
+		return borderWidthOpen;
+	}
+	public void setBorderWidthOpen(Boolean borderWidthOpen) {
+		this.borderWidthOpen = borderWidthOpen;
+	}
+	public String getBorderStyle() {
+		return borderStyle;
+	}
+	public void setBorderStyle(String borderStyle) {
+		this.borderStyle = borderStyle;
+	}
+	public Boolean getBorderStyleOpen() {
+		return borderStyleOpen;
+	}
+	public void setBorderStyleOpen(Boolean borderStyleOpen) {
+		this.borderStyleOpen = borderStyleOpen;
+	}
+	public Float getBorderColorRedValue() {
+		return borderColorRedValue;
+	}
+	public void setBorderColorRedValue(Float borderColorRedValue) {
+		this.borderColorRedValue = borderColorRedValue;
+	}
+	public Float getBorderColorGreenValue() {
+		return borderColorGreenValue;
+	}
+	public void setBorderColorGreenValue(Float borderColorGreenValue) {
+		this.borderColorGreenValue = borderColorGreenValue;
+	}
+	public Float getBorderColorBlueValue() {
+		return borderColorBlueValue;
+	}
+	public void setBorderColorBlueValue(Float borderColorBlueValue) {
+		this.borderColorBlueValue = borderColorBlueValue;
+	}
+	public Boolean getBorderColorOpen() {
+		return borderColorOpen;
+	}
+	public void setBorderColorOpen(Boolean borderColorOpen) {
+		this.borderColorOpen = borderColorOpen;
+	}
 	public Integer getBorderRadius() {
 		return borderRadius;
 	}
@@ -236,6 +374,18 @@ public class ModuleTag {
 	}
 	public void setBorderRadiusOpen(Boolean borderRadiusOpen) {
 		this.borderRadiusOpen = borderRadiusOpen;
+	}
+	public String getPosition() {
+		return position;
+	}
+	public void setPosition(String position) {
+		this.position = position;
+	}
+	public Boolean getPositionOpen() {
+		return positionOpen;
+	}
+	public void setPositionOpen(Boolean positionOpen) {
+		this.positionOpen = positionOpen;
 	}
 	public String getType() {
 		return type;
@@ -265,8 +415,13 @@ public class ModuleTag {
 	private String value;//标签默认值
 	private Float widthValue;//标签宽度值
 	private String widthUnit;//标签宽度单位
+	private Boolean widthOpen;
 	private Float heightValue;//标签高度值
 	private String heightUnit;//标签高度单位
+	private Boolean heightOpen;
+	private Float lineHeightValue;
+	private String lineHeightUnit;
+	private Boolean lineHeightOpen;
 	private Float marginLeftValue;//标签左外边距
 	private String marginLeftUnit;
 	private Boolean marginLeftOpen;
@@ -297,8 +452,28 @@ public class ModuleTag {
 	private Integer backgroundColorGreenValue;
 	private Integer backgroundColorBlueValue;
 	private Boolean backgroundColorOpen;
+	private Float borderTopWidthValue;
+	private String borderTopWidthUnit;
+	private Boolean borderTopWidthOpen;
+	private String borderTopStyle;
+	private Boolean borderTopStyleOpen;
+	private Integer borderTopColorRedValue;
+	private Integer borderTopColorGreenValue;
+	private Integer borderTopColorBlueValue;
+	private Boolean borderTopColorOpen;
+	private Float borderWidthValue;
+	private String borderWidthUnit;
+	private Boolean borderWidthOpen;
+	private String borderStyle;
+	private Boolean borderStyleOpen;
+	private Float borderColorRedValue;
+	private Float borderColorGreenValue;
+	private Float borderColorBlueValue;
+	private Boolean borderColorOpen;
 	private Integer borderRadius;
 	private Boolean borderRadiusOpen;
+	private String position;
+	private Boolean positionOpen;
 	private String type;//标签类型
 	private Integer areaId;//区域id
 	private Integer sort;//排序
