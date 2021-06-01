@@ -457,6 +457,15 @@ body{
 							<c:if test="${requestScope.comboModuleTagMap[combo.tagId].widthOpen}">
 								width:${requestScope.comboModuleTagMap[combo.tagId].widthValue}${requestScope.comboModuleTagMap[combo.tagId].widthUnit};
 							</c:if>
+							<c:if test="${requestScope.comboModuleTagMap[combo.tagId].heightOpen}">
+								height:${requestScope.comboModuleTagMap[combo.tagId].heightValue}${requestScope.comboModuleTagMap[combo.tagId].heightUnit};
+							</c:if>
+							<c:if test="${requestScope.comboModuleTagMap[combo.tagId].lineHeightOpen}">
+								line-height:${requestScope.comboModuleTagMap[combo.tagId].lineHeightValue}${requestScope.comboModuleTagMap[combo.tagId].lineHeightUnit};
+							</c:if>
+							<c:if test="${requestScope.comboModuleTagMap[combo.tagId].marginTopOpen}">
+								margin-top:${requestScope.comboModuleTagMap[combo.tagId].marginTopValue}${requestScope.comboModuleTagMap[combo.tagId].marginTopUnit};
+							</c:if>
 							<c:if test="${requestScope.comboModuleTagMap[combo.tagId].colorOpen}">
 								color:rgb(${requestScope.comboModuleTagMap[combo.tagId].colorRedValue},
 										${requestScope.comboModuleTagMap[combo.tagId].colorGreenValue},
@@ -464,6 +473,9 @@ body{
 							</c:if>
 							<c:if test="${requestScope.comboModuleTagMap[combo.tagId].fontSizeOpen}">
 								font-size:${requestScope.comboModuleTagMap[combo.tagId].fontSize}px;
+							</c:if>
+							<c:if test="${requestScope.comboModuleTagMap[combo.tagId].textAlignOpen}">
+								text-align:${requestScope.comboModuleTagMap[combo.tagId].textAlign};
 							</c:if>
 							<c:if test="${requestScope.comboModuleTagMap[combo.tagId].backgroundColorOpen}">
 								background-color:rgb(${requestScope.comboModuleTagMap[combo.tagId].backgroundColorRedValue},
