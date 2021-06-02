@@ -111,8 +111,8 @@
 					<div class="line_div"></div>
 					<li class="layui-nav-item">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/image/ico_3.gif" />
-						<a href="<%=basePath%>background/merchant/message/list">
-							&nbsp;&nbsp;&nbsp;省会管理
+						<a href="<%=basePath%>background/system/province/list">
+							&nbsp;&nbsp;&nbsp;省市管理
 						</a>
 					</li>
 				</div>

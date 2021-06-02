@@ -1,6 +1,7 @@
 package com.microMart.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.microMart.service.MerchantService;
+import com.microMart.service.*;
 import com.microMart.entity.*;
 import com.microMart.util.*;
 
@@ -29,12 +30,34 @@ public class SystemController {
 
 	@Autowired
 	private MerchantService merchantService;
+	@Autowired
+	private ProvinceService provinceService;
 	public static final String MODULE_NAME="/background/system";
 	
 	@RequestMapping(value="/merchant/info")
 	public String goSystemMerchantInfo() {
 		
 		return MODULE_NAME+"/merchant/info";
+	}
+	
+	@RequestMapping(value="/province/list")
+	public String goSystemProvinceList() {
+		
+		return MODULE_NAME+"/province/list";
+	}
+	
+	@RequestMapping(value="/selectProvinceList")
+	@ResponseBody
+	public Map<String, Object> selectProvinceList(String name,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		int count=provinceService.selectForInt(name);
+		List<Province> provinceList=provinceService.selectList(name, page, rows, sort, order);
+
+		jsonMap.put("total", count);
+		jsonMap.put("rows", provinceList);
+			
+		return jsonMap;
 	}
 	
 	@RequestMapping(value="/checkPassword")
@@ -127,5 +150,27 @@ public class SystemController {
 			e.printStackTrace();
 		}
 		return json;
+	}
+
+	/**
+	 * 添加省份
+	 * @param province
+	 * @return
+	 */
+	@RequestMapping(value="/addProvince")
+	@ResponseBody
+	public Map<String, Object> addProvince(Province province) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		int count=provinceService.add(province);
+        if(count==0) {
+        	jsonMap.put("status", "no");
+        	jsonMap.put("message", "添加省份失败！");
+        }
+        else {
+        	jsonMap.put("status", "ok");
+        	jsonMap.put("message", "添加省份成功！");
+        }
+		return jsonMap;
 	}
 }

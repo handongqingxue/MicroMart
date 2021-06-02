@@ -8,7 +8,7 @@ public class Help {
 	private String createTime;
 	private Integer sort;
 	private Integer merchantId;
-	private Boolean show;
+	private Boolean ifShow;
 	public Integer getId() {
 		return id;
 	}
@@ -45,11 +45,11 @@ public class Help {
 	public void setMerchantId(Integer merchantId) {
 		this.merchantId = merchantId;
 	}
-	public Boolean getShow() {
-		return show;
+	public Boolean getIfShow() {
+		return ifShow;
 	}
-	public void setShow(Boolean show) {
-		this.show = show;
+	public void setIfShow(Boolean ifShow) {
+		this.ifShow = ifShow;
 	}
 	
 }
