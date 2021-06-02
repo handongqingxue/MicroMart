@@ -14,4 +14,28 @@
 			and password=#{password}
 		</if>
 	</select>
+	<select id="getPwdByUserName" resultType="String">
+		select password from merchant where userName=#{userName}
+	</select>
+	<update id="updatePwdById">
+		update merchant set password=#{password} where id=#{id}
+	</update>
+	<update id="edit">
+		update merchant set
+		<trim suffixOverrides=",">
+			<if test="shopName!=null">
+				shopName=#{shopName},
+			</if>
+			<if test="shopAddress!=null">
+				shopAddress=#{shopAddress},
+			</if>
+			<if test="logo!=null">
+				logo=#{logo},
+			</if>
+			<if test="contactTel!=null">
+				contactTel=#{contactTel},
+			</if>
+		</trim>
+		where id=#{id}
+	</update>
 </mapper>

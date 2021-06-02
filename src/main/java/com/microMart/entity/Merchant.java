@@ -6,11 +6,10 @@ public class Merchant {
 	private String userName;
 	private String password;
 	private String nickName;
-	private String phone;
+	private String contactTel;
 	private String email;
 	private Integer role;
 	private String logo;
-	private String contactTel;
 	private String createTime;
 	private String shopName;
 	private String shopAddress;
@@ -46,11 +45,11 @@ public class Merchant {
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
-	public String getPhone() {
-		return phone;
+	public String getContactTel() {
+		return contactTel;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setContactTel(String contactTel) {
+		this.contactTel = contactTel;
 	}
 	public String getEmail() {
 		return email;
@@ -69,12 +68,6 @@ public class Merchant {
 	}
 	public void setLogo(String logo) {
 		this.logo = logo;
-	}
-	public String getContactTel() {
-		return contactTel;
-	}
-	public void setContactTel(String contactTel) {
-		this.contactTel = contactTel;
 	}
 	public String getCreateTime() {
 		return createTime;

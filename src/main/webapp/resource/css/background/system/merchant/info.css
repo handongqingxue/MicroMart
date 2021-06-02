@@ -143,10 +143,10 @@
 .editMerchant_div .title{
 	font-size: 22px;color: #4CAF50;text-align: center;padding-top: 50px;
 }
-.editMerchant_div .gsmc_div,.editMerchant_div .gsdz_div,.editMerchant_div .gswz_div,.editMerchant_div .lxdh_div,.editMerchant_div .yysj_div{
+.editMerchant_div .gsmc_div,.editMerchant_div .gsdz_div,.editMerchant_div .lxdh_div{
 	width:310px;margin: auto;padding-top: 20px;
 }
-.editMerchant_div .logo_div,.editMerchant_div .yyzz_div{
+.editMerchant_div .logo_div{
 	width:310px;height:230px;line-height:230px;margin: auto;padding-top: 20px;
 }
 .editMerchant_div .dhjpgz_span{
@@ -161,16 +161,13 @@
 .editMerchant_div .gswz_div .value_div{
 	width: 250px;margin-top: -20px;margin-left: 108px;
 }
-.editMerchant_div .yysj_div .time_div{
-	width: 260px;margin-top: -20px;margin-left: 110px;
-}
 .editMerchant_div .img_div{
 	width:180px;
 	height:230px;
 	margin-top:-230px;
 	margin-left: 108px;
 }
-.upLoBut_div,.upYyzzBut_div{
+.upLoBut_div{
 	width: 120px;
 	height: 30px;
 	line-height:30px;
@@ -179,7 +176,7 @@
 	background-color: #1777FF;
 	border-radius:5px;
 }
-.editMerchant_div .logo_img,.editMerchant_div .yyzz_img{
+.editMerchant_div .logo_img{
 	width: 180px;
 	height:180px;
 	margin-top: 10px;
@@ -220,7 +217,7 @@
 }
 
 .sjxx_div{
-	height:880px;
+	height:510px;
 	margin:20px 0 40px 238px;
 	padding-top:40px;
 	padding-left:40px;
