@@ -33,4 +33,10 @@ public class ProvinceServiceImpl implements ProvinceService {
 		return provinceDao.add(province);
 	}
 
+	@Override
+	public int edit(Province province) {
+		// TODO Auto-generated method stub
+		return provinceDao.edit(province);
+	}
+
 }

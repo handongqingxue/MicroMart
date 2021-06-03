@@ -173,4 +173,26 @@ public class SystemController {
         }
 		return jsonMap;
 	}
+
+	/**
+	 * 编辑省份
+	 * @param province
+	 * @return
+	 */
+	@RequestMapping(value="/editProvince")
+	@ResponseBody
+	public Map<String, Object> editProvince(Province province) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		int count=provinceService.edit(province);
+        if(count==0) {
+        	jsonMap.put("status", "no");
+        	jsonMap.put("message", "编辑省份失败！");
+        }
+        else {
+        	jsonMap.put("status", "ok");
+        	jsonMap.put("message", "编辑省份成功！");
+        }
+		return jsonMap;
+	}
 }

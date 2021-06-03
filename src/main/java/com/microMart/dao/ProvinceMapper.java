@@ -14,4 +14,6 @@ public interface ProvinceMapper {
 
 	int add(Province province);
 
+	int edit(Province province);
+
 }

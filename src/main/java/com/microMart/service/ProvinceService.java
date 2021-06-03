@@ -12,4 +12,6 @@ public interface ProvinceService {
 
 	int add(Province province);
 
+	int edit(Province province);
+
 }
