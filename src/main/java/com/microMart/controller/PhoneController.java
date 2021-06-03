@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.microMart.entity.*;
 import com.microMart.service.*;
@@ -26,6 +27,8 @@ public class PhoneController {
 	private HelpService helpService;
 	@Autowired
 	private ComboService comboService;
+	@Autowired
+	private ProvinceService provinceService;
 	
 	@RequestMapping(value="/order")
 	public String order(HttpServletRequest request) {
@@ -92,5 +95,23 @@ public class PhoneController {
 		request.setAttribute("comboModuleTagMap", comboModuleTagMap);
 		
 		return "/phone/order";
+	}
+	
+	@RequestMapping(value="/selectProvinceCBBData")
+	@ResponseBody
+	public Map<String, Object> selectProvinceCBBData(Boolean ifShow) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		List<Province> provinceList=provinceService.selectCBBData(ifShow);
+
+		if(provinceList.size()==0) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "ÔÝÎÞÊý¾Ý");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("data", provinceList);
+		}
+		return jsonMap;
 	}
 }

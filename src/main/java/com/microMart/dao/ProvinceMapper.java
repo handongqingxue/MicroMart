@@ -16,4 +16,6 @@ public interface ProvinceMapper {
 
 	int edit(Province province);
 
+	List<Province> selectCBBData(@Param("ifShow")Boolean ifShow);
+
 }

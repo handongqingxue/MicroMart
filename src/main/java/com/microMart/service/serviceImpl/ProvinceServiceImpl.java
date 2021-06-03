@@ -39,4 +39,10 @@ public class ProvinceServiceImpl implements ProvinceService {
 		return provinceDao.edit(province);
 	}
 
+	@Override
+	public List<Province> selectCBBData(Boolean ifShow) {
+		// TODO Auto-generated method stub
+		return provinceDao.selectCBBData(ifShow);
+	}
+
 }

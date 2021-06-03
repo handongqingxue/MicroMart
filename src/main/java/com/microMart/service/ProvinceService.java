@@ -14,4 +14,6 @@ public interface ProvinceService {
 
 	int edit(Province province);
 
+	List<Province> selectCBBData(Boolean ifShow);
+
 }
