@@ -33,4 +33,10 @@ public class CityServiceImpl implements CityService {
 		return cityDao.add(city);
 	}
 
+	@Override
+	public int edit(City city) {
+		// TODO Auto-generated method stub
+		return cityDao.edit(city);
+	}
+
 }

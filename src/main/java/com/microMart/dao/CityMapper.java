@@ -14,4 +14,6 @@ public interface CityMapper {
 
 	int add(City city);
 
+	int edit(City city);
+
 }

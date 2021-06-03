@@ -11,13 +11,15 @@ var phonePath='<%=basePath%>'+"phone/";
 var apjbsxzdNum=0;
 var epjbsxzdNum=1;
 var acjbsxzdNum=2;
+var ecjbsxzdNum=3;
 $(function(){
 	initProvinceTab();
 	initAddProvinceJBSXZDialog();//0.添加省份窗口
-	initEditProvinceJBSXZDialog();//1.修改运输商窗口
+	initEditProvinceJBSXZDialog();//1.修改省份窗口
 	
 	initCityTab();
 	initAddCityJBSXZDialog();//2.添加城市窗口
+	initEditCityJBSXZDialog();//3.修改城市窗口
 	
 	initDialogPosition();//将不同窗体移动到主要内容区域
 });
@@ -34,6 +36,10 @@ function initDialogPosition(){
 	//添加城市
 	var acjbsxzdpw=$("body").find(".panel.window").eq(acjbsxzdNum);
 	var acjbsxzdws=$("body").find(".window-shadow").eq(acjbsxzdNum);
+	
+	//编辑城市
+	var ecjbsxzdpw=$("body").find(".panel.window").eq(ecjbsxzdNum);
+	var ecjbsxzdws=$("body").find(".window-shadow").eq(ecjbsxzdNum);
 
 	var apdDiv=$("#add_province_dialog_div");
 	apdDiv.append(apjbsxzdpw);
@@ -46,6 +52,10 @@ function initDialogPosition(){
 	var acdDiv=$("#add_city_dialog_div");
 	acdDiv.append(acjbsxzdpw);
 	acdDiv.append(acjbsxzdws);
+
+	var ecdDiv=$("#edit_city_dialog_div");
+	ecdDiv.append(ecjbsxzdpw);
+	ecdDiv.append(ecjbsxzdws);
 }
 
 function initAddProvinceJBSXZDialog(){
@@ -215,7 +225,13 @@ function initEditProvinceJBSXZDialog(){
         	   openEditProvinceDialog(0);
            }},
            {text:"保存",id:"ok_but",iconCls:"icon-save",handler:function(){
-        	    editProvince();
+        	   if(checkEditProvinceName()){
+        		   if(checkEditProvinceSort()){
+        			   if(checkEditProvinceIfShow()){
+        	    			editProvince();
+        			   }
+        		   }
+        	   }
            }}
         ]
 	});
@@ -248,8 +264,92 @@ function initEditProvinceJBSXZDialog(){
 	openEditProvinceJBSXZDialog(0);
 }
 
+function initEditCityJBSXZDialog(){
+	initEditCityDivProvinceCBB();
+	initEditCityDivIfShowCBB();
+	
+	editCityDialog=$("#edit_city_jbsxz_dialog_div").dialog({
+		title:"编辑城市实体",
+		width:setFitWidthInParent("#edit_city_div","edit_city_jbsxz_dialog_div"),
+		height:281,
+		top:10,
+		left:20,
+		buttons:[
+           {text:"取消",id:"cancel_but",iconCls:"icon-cancel",handler:function(){
+        	   openEditCityDialog(0);
+           }},
+           {text:"保存",id:"ok_but",iconCls:"icon-save",handler:function(){
+        	   if(checkEditCityName()){
+        		   if(checkEditCityProvinceId()){
+	        		   if(checkEditCitySort()){
+	        			   if(checkEditCityIfShow()){
+        	    				editCity();
+	        			   }
+	        		   }
+        		   }
+        	   }
+           }}
+        ]
+	});
+
+	$("#edit_city_jbsxz_dialog_div table").css("width",(setFitWidthInParent("#edit_city_div","edit_city_jbsxz_dialog_table"))+"px");
+	$("#edit_city_jbsxz_dialog_div table").css("magin","-100px");
+	$("#edit_city_jbsxz_dialog_div table td").css("padding-left","20px");
+	$("#edit_city_jbsxz_dialog_div table td").css("padding-right","20px");
+	$("#edit_city_jbsxz_dialog_div table td").css("font-size","15px");
+	$("#edit_city_jbsxz_dialog_div table tr").css("height","45px");
+
+	$(".panel.window").eq(ecjbsxzdNum).css("margin-top","40px");
+	$(".panel.window .panel-title").eq(ecjbsxzdNum).css("color","#000");
+	$(".panel.window .panel-title").eq(ecjbsxzdNum).css("font-size","15px");
+	$(".panel.window .panel-title").eq(ecjbsxzdNum).css("padding-left","10px");
+	
+	$(".panel-header, .panel-body").eq(ecjbsxzdNum).css("border-color","#ddd");
+	
+	//以下的是表格下面的面板
+	$(".window-shadow").eq(ecjbsxzdNum).css("margin-top","40px");
+	$(".window,.window .window-body").css("border-color","#ddd");
+
+	$("#edit_city_jbsxz_dialog_div #cancel_but").css("left","30%");
+	$("#edit_city_jbsxz_dialog_div #cancel_but").css("position","absolute");
+
+	$("#edit_city_jbsxz_dialog_div #ok_but").css("left","55%");
+	$("#edit_city_jbsxz_dialog_div #ok_but").css("position","absolute");
+	$(".dialog-button").css("background-color","#fff");
+	$(".dialog-button .l-btn-text").css("font-size","20px");
+	openEditCityJBSXZDialog(0);
+}
+
 function initEditProvinceDivIfShowCBB(){
 	epdIfShowCBB=$("#edit_province_div #ifShow_cbb").combobox({
+		valueField:"value",
+		textField:"text",
+		data:[{"value":"","text":"请选择"},{"value":"1","text":"是"},{"value":"0","text":"否"}]
+	});
+}
+
+function initEditCityDivProvinceCBB(){
+	ecdProvinceCBB=$("#edit_city_div #province_cbb").combobox({
+		valueField:"value",
+		textField:"text"
+	});
+	var data=[{"value":"","text":"请选择"}];
+	$.post(phonePath+"selectProvinceCBBData",
+		function(result){
+			if(result.status=="ok"){
+				var provinceList=result.data;
+				for(var i=0;i<provinceList.length;i++){
+					var province=provinceList[i];
+					data.push({"value":province.id,"text":province.name});
+				}
+			}
+			ecdProvinceCBB.combobox("loadData",data);
+		}
+	,"json");
+}
+
+function initEditCityDivIfShowCBB(){
+	ecdIfShowCBB=$("#edit_city_div #ifShow_cbb").combobox({
 		valueField:"value",
 		textField:"text",
 		data:[{"value":"","text":"请选择"},{"value":"1","text":"是"},{"value":"0","text":"否"}]
@@ -346,7 +446,7 @@ function initCityTab(){
 				return value?"是":"否";
 			}},
 			{field:"id",title:"操作",width:60,formatter:function(value,row){
-				return "<a onclick=\"editProvinceTabRow()\">编辑</a>";
+				return "<a onclick=\"editCityTabRow()\">编辑</a>";
 			}}
 	    ]],
         onLoadSuccess:function(data){
@@ -608,6 +708,30 @@ function openEditProvinceJBSXZDialog(flag){
 	}
 }
 
+function openEditCityDialog(flag){
+	if(flag==1){
+		$("#edit_city_bg_div").css("display","block");
+	}
+	else{
+		$("#edit_city_bg_div").css("display","none");
+		$("#edit_city_div #id").val("");
+		$("#edit_city_div #name").val("");
+		ecdProvinceCBB.combobox("setValue","");
+		$("#edit_city_div #sort").val("");
+		ecdIfShowCBB.combobox("setValue","");
+	}
+	openEditCityJBSXZDialog(flag);
+}
+
+function openEditCityJBSXZDialog(flag){
+	if(flag==1){
+		editCityDialog.dialog("open");
+	}
+	else{
+		editCityDialog.dialog("close");
+	}
+}
+
 function editProvinceTabRow(){
 	var row=provinceTab.datagrid("getSelected");
 	if (row == null) {
@@ -619,6 +743,20 @@ function editProvinceTabRow(){
 	$("#edit_province_div #sort").val(row.sort);
 	epdIfShowCBB.combobox("setValue",row.ifShow?"1":"0");
 	openEditProvinceDialog(1);
+}
+
+function editCityTabRow(){
+	var row=cityTab.datagrid("getSelected");
+	if (row == null) {
+		$.messager.alert("提示","请选择要编辑的信息！","warning");
+		return false;
+	}
+	$("#edit_city_div #id").val(row.id);
+	$("#edit_city_div #name").val(row.name);
+	ecdProvinceCBB.combobox("setValue",row.provinceId);
+	$("#edit_city_div #sort").val(row.sort);
+	ecdIfShowCBB.combobox("setValue",row.ifShow?"1":"0");
+	openEditCityDialog(1);
 }
 
 function editProvince(){
@@ -640,17 +778,144 @@ function editProvince(){
 	,"json");
 }
 
+function focusEditProvinceName(){
+	var name = $("#edit_province_div #name").val();
+	if(name=="名称不能为空"){
+		$("#edit_province_div #name").val("");
+		$("#edit_province_div #name").css("color", "#555555");
+	}
+}
+
+//验证省份名称
+function checkEditProvinceName(){
+	var name = $("#edit_province_div #name").val();
+	if(name==null||name==""||name=="名称不能为空"){
+		$("#edit_province_div #name").css("color","#E15748");
+    	$("#edit_province_div #name").val("名称不能为空");
+    	return false;
+	}
+	else
+		return true;
+}
+
+//验证排序
+function checkEditProvinceSort(){
+	var sort = $("#edit_province_div #sort").val();
+	if(sort==null||sort==""){
+	  	alert("请输入排序");
+	  	return false;
+	}
+	else
+		return true;
+}
+
+//验证是否显示
+function checkEditProvinceIfShow(){
+	var flag=false;
+	var ifShow=epdIfShowCBB.combobox("getValue");
+	if(ifShow==null||ifShow==""){
+	  	alert("请选择是否显示");
+	  	flag=false;
+	}
+	else{
+		flag=true;
+	}
+	return flag;
+}
+
+function editCity(){
+	var id=$("#edit_city_div #id").val();
+	var name=$("#edit_city_div #name").val();
+	var provinceId=ecdProvinceCBB.combobox("getValue");
+	var sort=$("#edit_city_div #sort").val();
+	var ifShow=epdIfShowCBB.combobox("getValue");
+	$.post(systemPath+"editCity",
+		{id:id,name:name,provinceId:provinceId,sort:sort,ifShow:ifShow},
+		function(data){
+			if(data.status=="ok"){
+				alert(data.message);
+				var provinceId=provinceTab.datagrid("getSelected").id;		
+				loadCityTabData(provinceId);
+			}
+			else
+				alert(data.message);
+			openEditCityDialog(0);
+		}
+	,"json");
+}
+
+function focusEditCityName(){
+	var name = $("#edit_city_div #name").val();
+	if(name=="名称不能为空"){
+		$("#edit_city_div #name").val("");
+		$("#edit_city_div #name").css("color", "#555555");
+	}
+}
+
+//验证城市名称
+function checkEditCityName(){
+	var name = $("#edit_city_div #name").val();
+	if(name==null||name==""||name=="名称不能为空"){
+		$("#edit_city_div #name").css("color","#E15748");
+    	$("#edit_city_div #name").val("名称不能为空");
+    	return false;
+	}
+	else
+		return true;
+}
+
+//验证省份
+function checkEditCityProvinceId(){
+	var flag=false;
+	var provinceId=ecdProvinceCBB.combobox("getValue");
+	if(provinceId==null||provinceId==""){
+	  	alert("请选择省份");
+	  	flag=false;
+	}
+	else{
+		flag=true;
+	}
+	return flag;
+}
+
+//验证排序
+function checkEditCitySort(){
+	var sort = $("#edit_city_div #sort").val();
+	if(sort==null||sort==""){
+	  	alert("请输入排序");
+	  	return false;
+	}
+	else
+		return true;
+}
+
+//验证是否显示
+function checkEditCityIfShow(){
+	var flag=false;
+	var ifShow=ecdIfShowCBB.combobox("getValue");
+	if(ifShow==null||ifShow==""){
+	  	alert("请选择是否显示");
+	  	flag=false;
+	}
+	else{
+		flag=true;
+	}
+	return flag;
+}
+
 function setFitWidthInParent(parent,self){
 	var space=0;
 	switch (self) {
 	case "add_province_jbsxz_dialog_div":
 	case "edit_province_jbsxz_dialog_div":
 	case "add_city_jbsxz_dialog_div":
+	case "edit_city_jbsxz_dialog_div":
 		space=50;
 		break;
 	case "add_province_jbsxz_dialog_table":
 	case "edit_province_jbsxz_dialog_table":
 	case "add_city_jbsxz_dialog_table":
+	case "edit_city_jbsxz_dialog_table":
 		space=65;
 		break;
 	}
@@ -798,6 +1063,49 @@ function setFitWidthInParent(parent,self){
 .add_city_div .title_span{
 	margin-left: 30px;
 }
+
+.edit_city_bg_div{
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,.45);
+	position: fixed;
+	z-index: 9016;
+	display:none;
+}
+.edit_city_div{
+	width: 500px;
+	height: 450px;
+	margin: 150px auto 0;
+	background-color: #fff;
+	border-radius:5px;
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+.edit_city_div .xgst_div{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	border-bottom: #eee solid 1px;
+}
+.edit_city_div .xgst_span{
+	margin-left: 30px;
+}
+.edit_city_div .close_span{
+	float: right;margin-right: 30px;cursor: pointer;
+}
+.edit_city_dialog_div{
+	width: 500px;
+	height: 350px;
+	overflow-y: scroll;
+	position: absolute;
+}
+.edit_city_div .title_div{
+	width: 100%;height: 50px;line-height: 50px;
+}
+.edit_city_div .title_span{
+	margin-left: 30px;
+}
 </style>
 <title>省市查询</title>
 </head>
@@ -865,7 +1173,7 @@ function setFitWidthInParent(parent,self){
 						名称
 					</td>
 					<td style="width:60%;">
-						<input type="text" id="name" placeholder="请输入名称" style="width: 200px;height:30px;"/>
+						<input type="text" id="name" placeholder="请输入名称" style="width: 200px;height:30px;" onfocus="focusEditProvinceName()" onblur="checkEditProvinceName()"/>
 					</td>
 				  </tr>
 				  <tr style="border-bottom: #CAD9EA solid 1px;">
@@ -941,7 +1249,60 @@ function setFitWidthInParent(parent,self){
 		</div>
 	</div>
 </div>
-<!-- 添加省份end -->
+<!-- 添加城市end -->
+
+<!-- 编辑城市 start -->
+<div class="edit_city_bg_div" id="edit_city_bg_div">
+	<div class="edit_city_div" id="edit_city_div">
+		<div class="xgst_div">
+			<span class="xgst_span">编辑实体</span>
+			<span class="close_span" onclick="openEditCityDialog(0)">X</span>
+		</div>
+		<div class="edit_city_dialog_div" id="edit_city_dialog_div">
+			<div class="title_div">
+				<span class="title_span">省市管理-城市查询-编辑</span>
+			</div>
+			<div id="edit_city_jbsxz_dialog_div">
+				<input type="hidden" id="id"/>
+				<table>
+				  <tr style="border-bottom: #CAD9EA solid 1px;">
+					<td align="right" style="width:30%;">
+						名称
+					</td>
+					<td style="width:60%;">
+						<input type="text" id="name" placeholder="请输入名称" style="width: 200px;height:30px;" onfocus="focusEditCityName()" onblur="checkEditCityName()"/>
+					</td>
+				  </tr>
+				  <tr style="border-bottom: #CAD9EA solid 1px;">
+					<td align="right" style="width:30%;">
+						所属省份
+					</td>
+					<td style="width:60%;">
+						<input id="province_cbb"/>
+					</td>
+				  </tr>
+				  <tr style="border-bottom: #CAD9EA solid 1px;">
+					<td align="right" style="width:30%;">
+						排序
+					</td>
+					<td style="width:60%;">
+						<input type="number" id="sort" placeholder="请输入排序" style="width: 100px;height:30px;"/>
+					</td>
+				  </tr>
+				  <tr style="border-bottom: #CAD9EA solid 1px;">
+					<td align="right" style="width:30%;">
+						是否显示
+					</td>
+					<td style="width:60%;">
+						<input id="ifShow_cbb"/>
+					</td>
+				  </tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 编辑城市 end -->
 
 <div class="layui-layout layui-layout-admin">
 	<%@include file="../../side.jsp"%>

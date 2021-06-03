@@ -12,4 +12,6 @@ public interface CityService {
 
 	int add(City city);
 
+	int edit(City city);
+
 }

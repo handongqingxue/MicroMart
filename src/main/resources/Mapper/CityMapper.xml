@@ -56,4 +56,22 @@
  			</if>
  		</trim>
  	</insert>
+	<update id="edit" parameterType="com.microMart.entity.City">
+		update city set 
+		<trim suffixOverrides=",">
+			<if test="name!=null">
+				name=#{name},
+			</if>
+ 			<if test="provinceId!=null">
+ 				provinceId=#{provinceId},
+ 			</if>
+			<if test="sort!=null">
+				sort=#{sort},
+			</if>
+			<if test="ifShow!=null">
+				ifShow=#{ifShow},
+			</if>
+		</trim>
+		 where id=#{id}
+	</update>
 </mapper>
