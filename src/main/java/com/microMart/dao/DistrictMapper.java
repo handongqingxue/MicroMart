@@ -14,4 +14,6 @@ public interface DistrictMapper {
 
 	int add(District district);
 
+	int edit(District district);
+
 }

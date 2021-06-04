@@ -12,4 +12,6 @@ public interface DistrictService {
 
 	int add(District district);
 
+	int edit(District district);
+
 }

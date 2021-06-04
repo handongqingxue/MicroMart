@@ -293,4 +293,26 @@ public class SystemController {
         }
 		return jsonMap;
 	}
+
+	/**
+	 * 编辑市区
+	 * @param city
+	 * @return
+	 */
+	@RequestMapping(value="/editDistrict")
+	@ResponseBody
+	public Map<String, Object> editDistrict(District district) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		int count=districtService.edit(district);
+        if(count==0) {
+        	jsonMap.put("status", "no");
+        	jsonMap.put("message", "编辑市区失败！");
+        }
+        else {
+        	jsonMap.put("status", "ok");
+        	jsonMap.put("message", "编辑市区成功！");
+        }
+		return jsonMap;
+	}
 }

@@ -10,11 +10,11 @@
  		</if>
  	</select>
 	<select id="selectList" resultType="com.microMart.entity.District">
-		select * from district where cityId=#{cityId}
+		select c.provinceId,d.* from city c,district d where c.id=d.cityId and d.cityId=#{cityId}
 		<if test="name!=null&amp;name!=''">
-			and name like'%${name}%'
+			and d.name like'%${name}%'
 		</if>
- 		 order by sort limit #{start},#{rows}
+ 		 order by d.sort limit #{start},#{rows}
 	</select>
  	<insert id="add" parameterType="com.microMart.entity.District">
  		insert into district
@@ -48,4 +48,22 @@
  			</if>
  		</trim>
  	</insert>
+	<update id="edit" parameterType="com.microMart.entity.District">
+		update district set 
+		<trim suffixOverrides=",">
+			<if test="name!=null">
+				name=#{name},
+			</if>
+ 			<if test="cityId!=null">
+ 				cityId=#{cityId},
+ 			</if>
+			<if test="sort!=null">
+				sort=#{sort},
+			</if>
+			<if test="ifShow!=null">
+				ifShow=#{ifShow},
+			</if>
+		</trim>
+		 where id=#{id}
+	</update>
 </mapper>

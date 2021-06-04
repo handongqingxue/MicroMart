@@ -33,4 +33,10 @@ public class DistrictServiceImpl implements DistrictService {
 		return districtDao.add(district);
 	}
 
+	@Override
+	public int edit(District district) {
+		// TODO Auto-generated method stub
+		return districtDao.edit(district);
+	}
+
 }

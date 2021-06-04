@@ -13,6 +13,7 @@ var epjbsxzdNum=1;
 var acjbsxzdNum=2;
 var ecjbsxzdNum=3;
 var adjbsxzdNum=4;
+var edjbsxzdNum=5;
 $(function(){
 	initProvinceTab();
 	initAddProvinceJBSXZDialog();//0.添加省份窗口
@@ -24,6 +25,7 @@ $(function(){
 	
 	initDistrictTab();
 	initAddDistrictJBSXZDialog();//4.添加市区窗口
+	initEditDistrictJBSXZDialog();//5.修改市区窗口
 	
 	initDialogPosition();//将不同窗体移动到主要内容区域
 });
@@ -48,6 +50,10 @@ function initDialogPosition(){
 	//添加市区
 	var adjbsxzdpw=$("body").find(".panel.window").eq(adjbsxzdNum);
 	var adjbsxzdws=$("body").find(".window-shadow").eq(adjbsxzdNum);
+	
+	//编辑市区
+	var edjbsxzdpw=$("body").find(".panel.window").eq(edjbsxzdNum);
+	var edjbsxzdws=$("body").find(".window-shadow").eq(edjbsxzdNum);
 
 	var apdDiv=$("#add_province_dialog_div");
 	apdDiv.append(apjbsxzdpw);
@@ -68,6 +74,10 @@ function initDialogPosition(){
 	var adisdDiv=$("#add_district_dialog_div");
 	adisdDiv.append(adjbsxzdpw);
 	adisdDiv.append(adjbsxzdws);
+
+	var edisdDiv=$("#edit_district_dialog_div");
+	edisdDiv.append(edjbsxzdpw);
+	edisdDiv.append(edjbsxzdws);
 }
 
 function initAddProvinceJBSXZDialog(){
@@ -448,6 +458,65 @@ function initEditCityJBSXZDialog(){
 	openEditCityJBSXZDialog(0);
 }
 
+function initEditDistrictJBSXZDialog(){
+	initEditDistrictDivProvinceCBB();
+	initEditDistrictDivCityCBB();
+	initEditDistrictDivIfShowCBB();
+	
+	editDistrictDialog=$("#edit_district_jbsxz_dialog_div").dialog({
+		title:"编辑市区实体",
+		width:setFitWidthInParent("#edit_district_div","edit_district_jbsxz_dialog_div"),
+		height:331,
+		top:10,
+		left:20,
+		buttons:[
+           {text:"取消",id:"cancel_but",iconCls:"icon-cancel",handler:function(){
+        	   openEditDistrictDialog(0);
+           }},
+           {text:"保存",id:"ok_but",iconCls:"icon-save",handler:function(){
+        	   if(checkEditDistrictName()){
+        		   if(checkEditDistrictProvinceId()){
+            		   if(checkEditDistrictCityId()){
+		        		   if(checkEditDistrictSort()){
+		        			   if(checkEditDistrictIfShow()){
+	        	    				editDistrict();
+		        			   }
+		        		   }
+            		   }
+        		   }
+        	   }
+           }}
+        ]
+	});
+
+	$("#edit_district_jbsxz_dialog_div table").css("width",(setFitWidthInParent("#edit_district_div","edit_district_jbsxz_dialog_table"))+"px");
+	$("#edit_district_jbsxz_dialog_div table").css("magin","-100px");
+	$("#edit_district_jbsxz_dialog_div table td").css("padding-left","20px");
+	$("#edit_district_jbsxz_dialog_div table td").css("padding-right","20px");
+	$("#edit_district_jbsxz_dialog_div table td").css("font-size","15px");
+	$("#edit_district_jbsxz_dialog_div table tr").css("height","45px");
+
+	$(".panel.window").eq(edjbsxzdNum).css("margin-top","40px");
+	$(".panel.window .panel-title").eq(edjbsxzdNum).css("color","#000");
+	$(".panel.window .panel-title").eq(edjbsxzdNum).css("font-size","15px");
+	$(".panel.window .panel-title").eq(edjbsxzdNum).css("padding-left","10px");
+	
+	$(".panel-header, .panel-body").eq(edjbsxzdNum).css("border-color","#ddd");
+	
+	//以下的是表格下面的面板
+	$(".window-shadow").eq(edjbsxzdNum).css("margin-top","40px");
+	$(".window,.window .window-body").css("border-color","#ddd");
+
+	$("#edit_district_jbsxz_dialog_div #cancel_but").css("left","30%");
+	$("#edit_district_jbsxz_dialog_div #cancel_but").css("position","absolute");
+
+	$("#edit_district_jbsxz_dialog_div #ok_but").css("left","55%");
+	$("#edit_district_jbsxz_dialog_div #ok_but").css("position","absolute");
+	$(".dialog-button").css("background-color","#fff");
+	$(".dialog-button .l-btn-text").css("font-size","20px");
+	openEditDistrictJBSXZDialog(0);
+}
+
 function initEditProvinceDivIfShowCBB(){
 	epdIfShowCBB=$("#edit_province_div #ifShow_cbb").combobox({
 		valueField:"value",
@@ -478,6 +547,62 @@ function initEditCityDivProvinceCBB(){
 
 function initEditCityDivIfShowCBB(){
 	ecdIfShowCBB=$("#edit_city_div #ifShow_cbb").combobox({
+		valueField:"value",
+		textField:"text",
+		data:[{"value":"","text":"请选择"},{"value":"1","text":"是"},{"value":"0","text":"否"}]
+	});
+}
+
+function initEditDistrictDivProvinceCBB(){
+	edisdProvinceCBB=$("#edit_district_div #province_cbb").combobox({
+		valueField:"value",
+		textField:"text",
+		onSelect:function(){
+			var provinceId=$(this).combobox("getValue");
+			loadEditDistrictDivCityCBBData(provinceId);
+		}
+	});
+	var data=[{"value":"","text":"请选择"}];
+	$.post(phonePath+"selectProvinceCBBData",
+		function(result){
+			if(result.status=="ok"){
+				var provinceList=result.data;
+				for(var i=0;i<provinceList.length;i++){
+					var province=provinceList[i];
+					data.push({"value":province.id,"text":province.name});
+				}
+			}
+			edisdProvinceCBB.combobox("loadData",data);
+		}
+	,"json");
+}
+
+function initEditDistrictDivCityCBB(){
+	edisdCityCBB=$("#edit_district_div #city_cbb").combobox({
+		valueField:"value",
+		textField:"text"
+	});
+}
+
+function loadEditDistrictDivCityCBBData(provinceId){
+	var data=[{"value":"","text":"请选择"}];
+	$.post(phonePath+"selectCityCBBData",
+		{provinceId:provinceId},
+		function(result){
+			if(result.status=="ok"){
+				var cityList=result.data;
+				for(var i=0;i<cityList.length;i++){
+					var city=cityList[i];
+					data.push({"value":city.id,"text":city.name});
+				}
+			}
+			edisdCityCBB.combobox("loadData",data);
+		}
+	,"json");
+}
+
+function initEditDistrictDivIfShowCBB(){
+	edisdIfShowCBB=$("#edit_district_div #ifShow_cbb").combobox({
 		valueField:"value",
 		textField:"text",
 		data:[{"value":"","text":"请选择"},{"value":"1","text":"是"},{"value":"0","text":"否"}]
@@ -916,7 +1041,7 @@ function addDistrict(){
 	var provinceId=adisdProvinceCBB.combobox("getValue");
 	var cityId=adisdCityCBB.combobox("getValue");
 	var sort=$("#add_district_div #sort").val();
-	var ifShow=acdIfShowCBB.combobox("getValue");
+	var ifShow=adisdIfShowCBB.combobox("getValue");
 	$.post(systemPath+"addDistrict",
 		{name:name,provinceId:provinceId,cityId:cityId,sort:sort,ifShow:ifShow},
 		function(data){
@@ -1051,6 +1176,30 @@ function openEditCityJBSXZDialog(flag){
 	}
 }
 
+function openEditDistrictDialog(flag){
+	if(flag==1){
+		$("#edit_district_bg_div").css("display","block");
+	}
+	else{
+		$("#edit_district_bg_div").css("display","none");
+		$("#edit_district_div #id").val("");
+		$("#edit_district_div #name").val("");
+		edisdProvinceCBB.combobox("setValue","");
+		$("#edit_district_div #sort").val("");
+		edisdIfShowCBB.combobox("setValue","");
+	}
+	openEditDistrictJBSXZDialog(flag);
+}
+
+function openEditDistrictJBSXZDialog(flag){
+	if(flag==1){
+		editDistrictDialog.dialog("open");
+	}
+	else{
+		editDistrictDialog.dialog("close");
+	}
+}
+
 function editProvinceTabRow(){
 	var row=provinceTab.datagrid("getSelected");
 	if (row == null) {
@@ -1076,6 +1225,23 @@ function editCityTabRow(){
 	$("#edit_city_div #sort").val(row.sort);
 	ecdIfShowCBB.combobox("setValue",row.ifShow?"1":"0");
 	openEditCityDialog(1);
+}
+
+function editDistrictTabRow(){
+	var row=districtTab.datagrid("getSelected");
+	if (row == null) {
+		$.messager.alert("提示","请选择要编辑的信息！","warning");
+		return false;
+	}
+	$("#edit_district_div #id").val(row.id);
+	$("#edit_district_div #name").val(row.name);
+	var provinceId=row.provinceId;
+	edisdProvinceCBB.combobox("setValue",provinceId);
+	loadEditDistrictDivCityCBBData(provinceId);
+	edisdCityCBB.combobox("setValue",row.cityId);
+	$("#edit_district_div #sort").val(row.sort);
+	edisdIfShowCBB.combobox("setValue",row.ifShow?"1":"0");
+	openEditDistrictDialog(1);
 }
 
 function editProvince(){
@@ -1147,7 +1313,7 @@ function editCity(){
 	var name=$("#edit_city_div #name").val();
 	var provinceId=ecdProvinceCBB.combobox("getValue");
 	var sort=$("#edit_city_div #sort").val();
-	var ifShow=epdIfShowCBB.combobox("getValue");
+	var ifShow=ecdIfShowCBB.combobox("getValue");
 	$.post(systemPath+"editCity",
 		{id:id,name:name,provinceId:provinceId,sort:sort,ifShow:ifShow},
 		function(data){
@@ -1222,6 +1388,101 @@ function checkEditCityIfShow(){
 	return flag;
 }
 
+function editDistrict(){
+	var id=$("#edit_district_div #id").val();
+	var name=$("#edit_district_div #name").val();
+	var provinceId=edisdProvinceCBB.combobox("getValue");
+	var cityId=edisdCityCBB.combobox("getValue");
+	var sort=$("#edit_district_div #sort").val();
+	var ifShow=edisdIfShowCBB.combobox("getValue");
+	$.post(systemPath+"editDistrict",
+		{id:id,name:name,provinceId:provinceId,cityId:cityId,sort:sort,ifShow:ifShow},
+		function(data){
+			if(data.status=="ok"){
+				alert(data.message);
+				var cityId=cityTab.datagrid("getSelected").id;
+				loadDistrictTabData(cityId);
+			}
+			else
+				alert(data.message);
+			openEditDistrictDialog(0);
+		}
+	,"json");
+}
+
+function focusEditDistrictName(){
+	var name = $("#edit_district_div #name").val();
+	if(name=="名称不能为空"){
+		$("#edit_district_div #name").val("");
+		$("#edit_district_div #name").css("color", "#555555");
+	}
+}
+
+//验证市区名称
+function checkEditDistrictName(){
+	var name = $("#edit_district_div #name").val();
+	if(name==null||name==""||name=="名称不能为空"){
+		$("#edit_district_div #name").css("color","#E15748");
+    	$("#edit_district_div #name").val("名称不能为空");
+    	return false;
+	}
+	else
+		return true;
+}
+
+//验证省份
+function checkEditDistrictProvinceId(){
+	var flag=false;
+	var provinceId=edisdProvinceCBB.combobox("getValue");
+	if(provinceId==null||provinceId==""){
+	  	alert("请选择省份");
+	  	flag=false;
+	}
+	else{
+		flag=true;
+	}
+	return flag;
+}
+
+//验证城市
+function checkEditDistrictCityId(){
+	var flag=false;
+	var cityId=edisdCityCBB.combobox("getValue");
+	if(cityId==null||cityId==""){
+	  	alert("请选择城市");
+	  	flag=false;
+	}
+	else{
+		flag=true;
+	}
+	return flag;
+}
+
+//验证排序
+function checkEditDistrictSort(){
+	var sort = $("#edit_district_div #sort").val();
+	if(sort==null||sort==""){
+	  	alert("请输入排序");
+	  	return false;
+	}
+	else
+		return true;
+}
+
+//验证是否显示
+function checkEditDistrictIfShow(){
+	var flag=false;
+	var ifShow=edisdIfShowCBB.combobox("getValue");
+	if(ifShow==null||ifShow==""){
+	  	alert("请选择是否显示");
+	  	flag=false;
+	}
+	else{
+		flag=true;
+	}
+	return flag;
+}
+
 function setFitWidthInParent(parent,self){
 	var space=0;
 	switch (self) {
@@ -1230,6 +1491,7 @@ function setFitWidthInParent(parent,self){
 	case "add_city_jbsxz_dialog_div":
 	case "edit_city_jbsxz_dialog_div":
 	case "add_district_jbsxz_dialog_div":
+	case "edit_district_jbsxz_dialog_div":
 		space=50;
 		break;
 	case "add_province_jbsxz_dialog_table":
@@ -1237,6 +1499,7 @@ function setFitWidthInParent(parent,self){
 	case "add_city_jbsxz_dialog_table":
 	case "edit_city_jbsxz_dialog_table":
 	case "add_district_jbsxz_dialog_table":
+	case "edit_district_jbsxz_dialog_table":
 		space=65;
 		break;
 	}
@@ -1474,6 +1737,49 @@ function setFitWidthInParent(parent,self){
 	width: 100%;height: 50px;line-height: 50px;
 }
 .add_district_div .title_span{
+	margin-left: 30px;
+}
+
+.edit_district_bg_div{
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,.45);
+	position: fixed;
+	z-index: 9016;
+	display:none;
+}
+.edit_district_div{
+	width: 500px;
+	height: 500px;
+	margin: 150px auto 0;
+	background-color: #fff;
+	border-radius:5px;
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+.edit_district_div .xgst_div{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	border-bottom: #eee solid 1px;
+}
+.edit_district_div .xgst_span{
+	margin-left: 30px;
+}
+.edit_district_div .close_span{
+	float: right;margin-right: 30px;cursor: pointer;
+}
+.edit_district_dialog_div{
+	width: 500px;
+	height: 400px;
+	overflow-y: scroll;
+	position: absolute;
+}
+.edit_district_div .title_div{
+	width: 100%;height: 50px;line-height: 50px;
+}
+.edit_district_div .title_span{
 	margin-left: 30px;
 }
 </style>
@@ -1733,6 +2039,67 @@ function setFitWidthInParent(parent,self){
 	</div>
 </div>
 <!-- 添加市区end -->
+
+<!-- 编辑市区 start -->
+<div class="edit_district_bg_div" id="edit_district_bg_div">
+	<div class="edit_district_div" id="edit_district_div">
+		<div class="xgst_div">
+			<span class="xgst_span">编辑实体</span>
+			<span class="close_span" onclick="openEditDistrictDialog(0)">X</span>
+		</div>
+		<div class="edit_district_dialog_div" id="edit_district_dialog_div">
+			<div class="title_div">
+				<span class="title_span">省市管理-市区查询-编辑</span>
+			</div>
+			<div id="edit_district_jbsxz_dialog_div">
+				<input type="hidden" id="id"/>
+				<table>
+				  <tr style="border-bottom: #CAD9EA solid 1px;">
+					<td align="right" style="width:30%;">
+						名称
+					</td>
+					<td style="width:60%;">
+						<input type="text" id="name" placeholder="请输入名称" style="width: 200px;height:30px;" onfocus="focusEditDistrictName()" onblur="checkEditDistrictName()"/>
+					</td>
+				  </tr>
+				  <tr style="border-bottom: #CAD9EA solid 1px;">
+					<td align="right" style="width:30%;">
+						所属省份
+					</td>
+					<td style="width:60%;">
+						<input id="province_cbb"/>
+					</td>
+				  </tr>
+				  <tr style="border-bottom: #CAD9EA solid 1px;">
+					<td align="right" style="width:30%;">
+						所属城市
+					</td>
+					<td style="width:60%;">
+						<input id="city_cbb"/>
+					</td>
+				  </tr>
+				  <tr style="border-bottom: #CAD9EA solid 1px;">
+					<td align="right" style="width:30%;">
+						排序
+					</td>
+					<td style="width:60%;">
+						<input type="number" id="sort" placeholder="请输入排序" style="width: 100px;height:30px;"/>
+					</td>
+				  </tr>
+				  <tr style="border-bottom: #CAD9EA solid 1px;">
+					<td align="right" style="width:30%;">
+						是否显示
+					</td>
+					<td style="width:60%;">
+						<input id="ifShow_cbb"/>
+					</td>
+				  </tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 编辑市区 end -->
 
 <div class="layui-layout layui-layout-admin">
 	<%@include file="../../side.jsp"%>

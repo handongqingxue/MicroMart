@@ -4,6 +4,7 @@ public class District {
 
 	private Integer id;//Ö÷¼ü
 	private String name;
+	private Integer provinceId;
 	private Integer cityId;
 	private Integer sort;
 	private Boolean ifShow;
@@ -18,6 +19,12 @@ public class District {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public Integer getProvinceId() {
+		return provinceId;
+	}
+	public void setProvinceId(Integer provinceId) {
+		this.provinceId = provinceId;
 	}
 	public Integer getCityId() {
 		return cityId;
