@@ -256,6 +256,7 @@ body{
 						<c:if test="${moduleTag.widthOpen}">width:${moduleTag.widthValue}${moduleTag.widthUnit};</c:if>
 						<c:if test="${moduleTag.heightOpen}">height:${moduleTag.heightValue}${moduleTag.heightUnit};</c:if>
 						<c:if test="${moduleTag.lineHeightOpen}">line-height:${moduleTag.lineHeightValue}${moduleTag.lineHeightUnit};</c:if>
+						<c:if test='${moduleTag.marginOpen}'>margin:${moduleTag.margin};</c:if>
 						<c:if test='${moduleTag.marginTopOpen}'>margin-top:${moduleTag.marginTopValue}${moduleTag.marginTopUnit};</c:if>
 						<c:if test='${moduleTag.marginLeftOpen}'>margin-left:${moduleTag.marginLeftValue}${moduleTag.marginLeftUnit};</c:if>
 						<c:if test='${moduleTag.paddingTopOpen}'>padding-top:${moduleTag.paddingTop}px;</c:if>
@@ -267,11 +268,16 @@ body{
 						<c:if test='${moduleTag.fontWeightOpen}'>font-weight:${moduleTag.fontWeight};</c:if>
 						<c:if test='${moduleTag.textAlignOpen}'>text-align:${moduleTag.textAlign};</c:if>
 						<c:if test='${moduleTag.backgroundColorOpen}'>background-color:rgb(${moduleTag.backgroundColorRedValue},${moduleTag.backgroundColorGreenValue},${moduleTag.backgroundColorBlueValue});</c:if>
-						<c:if test='${moduleTag.borderTopWidthOpen}'>border-top:${moduleTag.borderTopWidthValue}${moduleTag.borderTopWidthUnit};</c:if>
+						<c:if test='${moduleTag.borderTopWidthOpen}'>border-top-width:${moduleTag.borderTopWidthValue}${moduleTag.borderTopWidthUnit};</c:if>
 						<c:if test='${moduleTag.borderTopStyleOpen}'>border-style:${moduleTag.borderTopStyle};</c:if>
 						<c:if test='${moduleTag.borderTopColorOpen}'>border-top-color:rgb(${moduleTag.borderTopColorRedValue},
 																						  ${moduleTag.borderTopColorGreenValue},
 																						  ${moduleTag.borderTopColorBlueValue});</c:if>
+						<c:if test='${moduleTag.borderBottomWidthOpen}'>border-bottom-width:${moduleTag.borderBottomWidthValue}${moduleTag.borderBottomWidthUnit};</c:if>
+						<c:if test='${moduleTag.borderBottomStyleOpen}'>border-bottom-style:${moduleTag.borderBottomStyle};</c:if>
+						<c:if test='${moduleTag.borderBottomColorOpen}'>border-bottom-color:rgb(${moduleTag.borderBottomColorRedValue},
+																						  ${moduleTag.borderBottomColorGreenValue},
+																						  ${moduleTag.borderBottomColorBlueValue});</c:if>
 						<c:if test='${moduleTag.borderRadiusOpen}'>border-radius:${moduleTag.borderRadius}px;</c:if>
 						<c:if test='${moduleTag.positionOpen}'>position:${moduleTag.position};</c:if>
 						">${moduleTag.value}</${moduleTag.type}>
@@ -499,6 +505,13 @@ body{
 					</c:if>
 				</c:if>
 			</c:forEach>
+		</div>
+	</c:if>
+	<c:if  test="${moduleArea.tagType eq 'orderDiv' }">
+		<div>
+			<div style="width: 95%;height: 40px;line-height: 40px;margin: auto;">
+				<span>数量</span>
+			</div>
 		</div>
 	</c:if>
 </c:forEach>

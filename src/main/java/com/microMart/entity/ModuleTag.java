@@ -308,6 +308,60 @@ public class ModuleTag {
 	}
 	public void setBorderTopColorOpen(Boolean borderTopColorOpen) {
 		this.borderTopColorOpen = borderTopColorOpen;
+	}	
+	public Float getBorderBottomWidthValue() {
+		return borderBottomWidthValue;
+	}
+	public void setBorderBottomWidthValue(Float borderBottomWidthValue) {
+		this.borderBottomWidthValue = borderBottomWidthValue;
+	}
+	public String getBorderBottomWidthUnit() {
+		return borderBottomWidthUnit;
+	}
+	public void setBorderBottomWidthUnit(String borderBottomWidthUnit) {
+		this.borderBottomWidthUnit = borderBottomWidthUnit;
+	}
+	public Boolean getBorderBottomWidthOpen() {
+		return borderBottomWidthOpen;
+	}
+	public void setBorderBottomWidthOpen(Boolean borderBottomWidthOpen) {
+		this.borderBottomWidthOpen = borderBottomWidthOpen;
+	}
+	public String getBorderBottomStyle() {
+		return borderBottomStyle;
+	}
+	public void setBorderBottomStyle(String borderBottomStyle) {
+		this.borderBottomStyle = borderBottomStyle;
+	}
+	public Boolean getBorderBottomStyleOpen() {
+		return borderBottomStyleOpen;
+	}
+	public void setBorderBottomStyleOpen(Boolean borderBottomStyleOpen) {
+		this.borderBottomStyleOpen = borderBottomStyleOpen;
+	}
+	public Integer getBorderBottomColorRedValue() {
+		return borderBottomColorRedValue;
+	}
+	public void setBorderBottomColorRedValue(Integer borderBottomColorRedValue) {
+		this.borderBottomColorRedValue = borderBottomColorRedValue;
+	}
+	public Integer getBorderBottomColorGreenValue() {
+		return borderBottomColorGreenValue;
+	}
+	public void setBorderBottomColorGreenValue(Integer borderBottomColorGreenValue) {
+		this.borderBottomColorGreenValue = borderBottomColorGreenValue;
+	}
+	public Integer getBorderBottomColorBlueValue() {
+		return borderBottomColorBlueValue;
+	}
+	public void setBorderBottomColorBlueValue(Integer borderBottomColorBlueValue) {
+		this.borderBottomColorBlueValue = borderBottomColorBlueValue;
+	}
+	public Boolean getBorderBottomColorOpen() {
+		return borderBottomColorOpen;
+	}
+	public void setBorderBottomColorOpen(Boolean borderBottomColorOpen) {
+		this.borderBottomColorOpen = borderBottomColorOpen;
 	}
 	public Float getBorderWidthValue() {
 		return borderWidthValue;
@@ -339,22 +393,22 @@ public class ModuleTag {
 	public void setBorderStyleOpen(Boolean borderStyleOpen) {
 		this.borderStyleOpen = borderStyleOpen;
 	}
-	public Float getBorderColorRedValue() {
+	public Integer getBorderColorRedValue() {
 		return borderColorRedValue;
 	}
-	public void setBorderColorRedValue(Float borderColorRedValue) {
+	public void setBorderColorRedValue(Integer borderColorRedValue) {
 		this.borderColorRedValue = borderColorRedValue;
 	}
-	public Float getBorderColorGreenValue() {
+	public Integer getBorderColorGreenValue() {
 		return borderColorGreenValue;
 	}
-	public void setBorderColorGreenValue(Float borderColorGreenValue) {
+	public void setBorderColorGreenValue(Integer borderColorGreenValue) {
 		this.borderColorGreenValue = borderColorGreenValue;
 	}
-	public Float getBorderColorBlueValue() {
+	public Integer getBorderColorBlueValue() {
 		return borderColorBlueValue;
 	}
-	public void setBorderColorBlueValue(Float borderColorBlueValue) {
+	public void setBorderColorBlueValue(Integer borderColorBlueValue) {
 		this.borderColorBlueValue = borderColorBlueValue;
 	}
 	public Boolean getBorderColorOpen() {
@@ -461,14 +515,23 @@ public class ModuleTag {
 	private Integer borderTopColorGreenValue;
 	private Integer borderTopColorBlueValue;
 	private Boolean borderTopColorOpen;
+	private Float borderBottomWidthValue;
+	private String borderBottomWidthUnit;
+	private Boolean borderBottomWidthOpen;
+	private String borderBottomStyle;
+	private Boolean borderBottomStyleOpen;
+	private Integer borderBottomColorRedValue;
+	private Integer borderBottomColorGreenValue;
+	private Integer borderBottomColorBlueValue;
+	private Boolean borderBottomColorOpen;
 	private Float borderWidthValue;
 	private String borderWidthUnit;
 	private Boolean borderWidthOpen;
 	private String borderStyle;
 	private Boolean borderStyleOpen;
-	private Float borderColorRedValue;
-	private Float borderColorGreenValue;
-	private Float borderColorBlueValue;
+	private Integer borderColorRedValue;
+	private Integer borderColorGreenValue;
+	private Integer borderColorBlueValue;
 	private Boolean borderColorOpen;
 	private Integer borderRadius;
 	private Boolean borderRadiusOpen;
