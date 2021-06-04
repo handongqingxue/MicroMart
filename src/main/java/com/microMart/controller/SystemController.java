@@ -34,6 +34,8 @@ public class SystemController {
 	private ProvinceService provinceService;
 	@Autowired
 	private CityService cityService;
+	@Autowired
+	private DistrictService districtService;
 	public static final String MODULE_NAME="/background/system";
 	
 	@RequestMapping(value="/merchant/info")
@@ -72,6 +74,20 @@ public class SystemController {
 
 		jsonMap.put("total", count);
 		jsonMap.put("rows", cityList);
+			
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/selectDistrictList")
+	@ResponseBody
+	public Map<String, Object> selectDistrictList(String name,Integer cityId,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		int count=districtService.selectForInt(name, cityId);
+		List<District> districtList=districtService.selectList(name, cityId, page, rows, sort, order);
+
+		jsonMap.put("total", count);
+		jsonMap.put("rows", districtList);
 			
 		return jsonMap;
 	}
@@ -252,6 +268,28 @@ public class SystemController {
         else {
         	jsonMap.put("status", "ok");
         	jsonMap.put("message", "编辑城市成功！");
+        }
+		return jsonMap;
+	}
+
+	/**
+	 * 添加市区
+	 * @param district
+	 * @return
+	 */
+	@RequestMapping(value="/addDistrict")
+	@ResponseBody
+	public Map<String, Object> addDistrict(District district) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		int count=districtService.add(district);
+        if(count==0) {
+        	jsonMap.put("status", "no");
+        	jsonMap.put("message", "添加市区失败！");
+        }
+        else {
+        	jsonMap.put("status", "ok");
+        	jsonMap.put("message", "添加市区成功！");
         }
 		return jsonMap;
 	}

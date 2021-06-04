@@ -39,4 +39,10 @@ public class CityServiceImpl implements CityService {
 		return cityDao.edit(city);
 	}
 
+	@Override
+	public List<City> selectCBBData(Integer provinceId, Boolean ifShow) {
+		// TODO Auto-generated method stub
+		return cityDao.selectCBBData(provinceId, ifShow);
+	}
+
 }

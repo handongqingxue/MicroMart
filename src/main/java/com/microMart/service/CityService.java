@@ -14,4 +14,6 @@ public interface CityService {
 
 	int edit(City city);
 
+	List<City> selectCBBData(Integer provinceId, Boolean ifShow);
+
 }

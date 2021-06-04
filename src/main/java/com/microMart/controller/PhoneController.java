@@ -29,6 +29,8 @@ public class PhoneController {
 	private ComboService comboService;
 	@Autowired
 	private ProvinceService provinceService;
+	@Autowired
+	private CityService cityService;
 	
 	@RequestMapping(value="/order")
 	public String order(HttpServletRequest request) {
@@ -111,6 +113,24 @@ public class PhoneController {
 		else {
 			jsonMap.put("status", "ok");
 			jsonMap.put("data", provinceList);
+		}
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/selectCityCBBData")
+	@ResponseBody
+	public Map<String, Object> selectCityCBBData(Integer provinceId, Boolean ifShow) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		List<City> cityList=cityService.selectCBBData(provinceId,ifShow);
+
+		if(cityList.size()==0) {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "ÔÝÎÞÊý¾Ý");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("data", cityList);
 		}
 		return jsonMap;
 	}

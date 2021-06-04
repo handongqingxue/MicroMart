@@ -24,6 +24,12 @@
 		</if>
  		 order by sort limit #{start},#{rows}
 	</select>
+	<select id="selectCBBData" resultType="com.microMart.entity.City">
+		select * from city where provinceId=#{provinceId}
+		<if test="ifShow!=null&amp;ifShow!=''">
+			and ifShow=#{ifShow}
+		</if>
+	</select>
  	<insert id="add" parameterType="com.microMart.entity.City">
  		insert into city
  		<trim prefix="(" suffix=")" suffixOverrides=",">
