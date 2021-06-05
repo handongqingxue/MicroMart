@@ -233,6 +233,7 @@ body{
 	<c:if test="${moduleArea.tagType eq 'div' }">
 		<div style="width:${moduleArea.widthValue}${moduleArea.widthUnit};
 					<c:if test="${moduleArea.heightOpen}">height:${moduleArea.heightValue}${moduleArea.heightUnit};</c:if>
+					<c:if test="${moduleArea.lineHeightOpen}">line-height:${moduleArea.lineHeightValue}${moduleArea.lineHeightUnit};</c:if>
 					<c:if test="${moduleArea.marginOpen}">margin:${moduleArea.margin};</c:if>
 					<c:if test="${moduleArea.borderBottomColorOpen}">
 						border-bottom-color:rgba(${moduleArea.borderBottomColorRedValue},
@@ -252,7 +253,9 @@ body{
 						">
 					</c:if>
 					<c:if test="${moduleTag.type eq 'span'||moduleTag.type eq 'div' }">
-						<${moduleTag.type} style="
+						<${moduleTag.type}
+						<c:if test="${moduleTag.tagIdOpen}">id="${moduleTag.tagId}"</c:if>
+						 style="
 						<c:if test="${moduleTag.widthOpen}">width:${moduleTag.widthValue}${moduleTag.widthUnit};</c:if>
 						<c:if test="${moduleTag.heightOpen}">height:${moduleTag.heightValue}${moduleTag.heightUnit};</c:if>
 						<c:if test="${moduleTag.lineHeightOpen}">line-height:${moduleTag.lineHeightValue}${moduleTag.lineHeightUnit};</c:if>
@@ -507,13 +510,23 @@ body{
 			</c:forEach>
 		</div>
 	</c:if>
+	<!-- 
 	<c:if  test="${moduleArea.tagType eq 'orderDiv' }">
-		<div>
-			<div style="width: 95%;height: 40px;line-height: 40px;margin: auto;">
-				<span>数量</span>
-			</div>
+		<div style="width: 100%;height: 50px;line-height: 50px;background-color: rgb(255,255,255);">
+			<span style="color:rgb(72,72,72);margin-left:10px;">数量</span>
+			<div style="width:30px;height:30px;line-height:30px;margin-top:-38px;margin-left:70px;text-align:center;background-color:rgb(245,245,245)">-</div>
+			<div style="width:30px;height:30px;line-height:30px;margin-top:-30px;margin-left:105px;font-size: 15px;text-align:center;background-color:rgb(245,245,245)">1</div>
+			<div style="width:30px;height:30px;line-height:30px;margin-top:-30px;margin-left:140px;text-align:center;background-color:rgb(245,245,245)">+</div>
+			<span style="color: rgb(72,72,72);font-size: 15px;margin-top:-40px;margin-left:200px;position: absolute;">应付款</span>
+			<span style="color: rgb(235,25,58);font-size: 15px;margin-top:-40px;margin-left:260px;position: absolute;">￥</span>
+			<span style="color: rgb(235,25,58);font-size: 15px;margin-top:-40px;margin-left:280px;position: absolute;">168</span>
 		</div>
 	</c:if>
+			<div style="width: 100%;height: 10px;background-color: rgb(245,245,245);">
+			</div>
+			<div style="width: 100%;height: 50px;line-height: 50px;background-color: rgb(255,255,255);">
+			</div>
+			 -->
 </c:forEach>
 </body>
 </html>

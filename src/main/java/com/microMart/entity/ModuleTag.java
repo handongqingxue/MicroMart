@@ -447,6 +447,18 @@ public class ModuleTag {
 	public void setType(String type) {
 		this.type = type;
 	}
+	public String getTagId() {
+		return tagId;
+	}
+	public void setTagId(String tagId) {
+		this.tagId = tagId;
+	}
+	public Boolean getTagIdOpen() {
+		return tagIdOpen;
+	}
+	public void setTagIdOpen(Boolean tagIdOpen) {
+		this.tagIdOpen = tagIdOpen;
+	}
 	public Integer getAreaId() {
 		return areaId;
 	}
@@ -538,6 +550,8 @@ public class ModuleTag {
 	private String position;
 	private Boolean positionOpen;
 	private String type;//标签类型
+	private String tagId;
+	private Boolean tagIdOpen;
 	private Integer areaId;//区域id
 	private Integer sort;//排序
 	private Boolean ifShow;//标签是否显示

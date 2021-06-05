@@ -73,6 +73,12 @@ public class ModuleArea {
 	public void setLineHeightUnit(String lineHeightUnit) {
 		this.lineHeightUnit = lineHeightUnit;
 	}
+	public Boolean getLineHeightOpen() {
+		return lineHeightOpen;
+	}
+	public void setLineHeightOpen(Boolean lineHeightOpen) {
+		this.lineHeightOpen = lineHeightOpen;
+	}
 	public Float getMarginTopValue() {
 		return marginTopValue;
 	}
@@ -558,6 +564,7 @@ public class ModuleArea {
 	private Boolean heightOpen;
 	private Float lineHeightValue;
 	private String lineHeightUnit;
+	private Boolean lineHeightOpen;
 	private Float marginTopValue;
 	private String marginTopUnit;
 	private Boolean marginTopOpen;
